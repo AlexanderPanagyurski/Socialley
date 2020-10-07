@@ -29,8 +29,6 @@ namespace Socialley.Models
 
         public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
 
-        public virtual ICollection<PostLike> PostsLikes { get; set; } = new HashSet<PostLike>();
-
         public virtual ICollection<BlockedPost> BlockedPosts { get; set; } = new HashSet<BlockedPost>();
 
         public virtual ICollection<PostTag> PostsTags { get; set; } = new HashSet<PostTag>();
