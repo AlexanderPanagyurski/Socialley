@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "VKgqLxUX0a5T6VvUGLmzC9ZdPoQm7GLXaS9gnpcob5F7UmMHsHOvMVq2S+8zTVTZopcGLM9brGVC0BRRdGsgbw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\home\\Desktop\\GitHub Repositories\\Socialley\\Socialley\\Socialley.Common\\Socialley.Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\home\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

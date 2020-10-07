@@ -1,0 +1,12 @@
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\bin\Debug\netstandard2.0\Socialley.Models.deps.json
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\bin\Debug\netstandard2.0\Socialley.Models.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\bin\Debug\netstandard2.0\Socialley.Models.pdb
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\bin\Debug\netstandard2.0\Socialley.Common.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\bin\Debug\netstandard2.0\Socialley.Common.pdb
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\obj\Debug\netstandard2.0\Socialley.Models.csprojAssemblyReference.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\obj\Debug\netstandard2.0\Socialley.Models.AssemblyInfoInputs.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\obj\Debug\netstandard2.0\Socialley.Models.AssemblyInfo.cs
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\obj\Debug\netstandard2.0\Socialley.Models.csproj.CoreCompileInputs.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\obj\Debug\netstandard2.0\Socialley.Models.csproj.CopyComplete
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\obj\Debug\netstandard2.0\Socialley.Models.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Models\obj\Debug\netstandard2.0\Socialley.Models.pdb

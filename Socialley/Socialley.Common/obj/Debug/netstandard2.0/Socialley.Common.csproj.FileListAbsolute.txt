@@ -1,0 +1,9 @@
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Common\bin\Debug\netstandard2.0\Socialley.Common.deps.json
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Common\bin\Debug\netstandard2.0\Socialley.Common.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Common\bin\Debug\netstandard2.0\Socialley.Common.pdb
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Common\obj\Debug\netstandard2.0\Socialley.Common.csprojAssemblyReference.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Common\obj\Debug\netstandard2.0\Socialley.Common.AssemblyInfoInputs.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Common\obj\Debug\netstandard2.0\Socialley.Common.AssemblyInfo.cs
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Common\obj\Debug\netstandard2.0\Socialley.Common.csproj.CoreCompileInputs.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Common\obj\Debug\netstandard2.0\Socialley.Common.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Common\obj\Debug\netstandard2.0\Socialley.Common.pdb

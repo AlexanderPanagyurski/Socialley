@@ -1,0 +1,17 @@
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\bin\Debug\netcoreapp3.1\Socialley.Data.deps.json
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\bin\Debug\netcoreapp3.1\Socialley.Data.runtimeconfig.json
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\bin\Debug\netcoreapp3.1\Socialley.Data.runtimeconfig.dev.json
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\bin\Debug\netcoreapp3.1\Socialley.Data.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\bin\Debug\netcoreapp3.1\Socialley.Data.pdb
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\bin\Debug\netcoreapp3.1\Socialley.Common.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\bin\Debug\netcoreapp3.1\Socialley.Models.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\bin\Debug\netcoreapp3.1\Socialley.Common.pdb
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\bin\Debug\netcoreapp3.1\Socialley.Models.pdb
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\obj\Debug\netcoreapp3.1\Socialley.Data.csprojAssemblyReference.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\obj\Debug\netcoreapp3.1\Socialley.Data.AssemblyInfoInputs.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\obj\Debug\netcoreapp3.1\Socialley.Data.AssemblyInfo.cs
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\obj\Debug\netcoreapp3.1\Socialley.Data.csproj.CoreCompileInputs.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\obj\Debug\netcoreapp3.1\Socialley.Data.csproj.CopyComplete
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\obj\Debug\netcoreapp3.1\Socialley.Data.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\obj\Debug\netcoreapp3.1\Socialley.Data.pdb
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Data\obj\Debug\netcoreapp3.1\Socialley.Data.genruntimeconfig.cache

@@ -1,0 +1,16 @@
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\bin\Debug\netcoreapp3.1\Socialley.Services.deps.json
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\bin\Debug\netcoreapp3.1\Socialley.Services.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\bin\Debug\netcoreapp3.1\Socialley.Services.pdb
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\bin\Debug\netcoreapp3.1\Socialley.Common.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\bin\Debug\netcoreapp3.1\Socialley.Data.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\bin\Debug\netcoreapp3.1\Socialley.Models.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\bin\Debug\netcoreapp3.1\Socialley.Data.pdb
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\bin\Debug\netcoreapp3.1\Socialley.Models.pdb
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\bin\Debug\netcoreapp3.1\Socialley.Common.pdb
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\obj\Debug\netcoreapp3.1\Socialley.Services.csprojAssemblyReference.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\obj\Debug\netcoreapp3.1\Socialley.Services.AssemblyInfoInputs.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\obj\Debug\netcoreapp3.1\Socialley.Services.AssemblyInfo.cs
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\obj\Debug\netcoreapp3.1\Socialley.Services.csproj.CoreCompileInputs.cache
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\obj\Debug\netcoreapp3.1\Socialley.Services.csproj.CopyComplete
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\obj\Debug\netcoreapp3.1\Socialley.Services.dll
+C:\Users\home\Desktop\GitHub Repositories\Socialley\Socialley\Socialley.Services\obj\Debug\netcoreapp3.1\Socialley.Services.pdb
