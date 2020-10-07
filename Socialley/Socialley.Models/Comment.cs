@@ -13,7 +13,6 @@ namespace Socialley.Models
         public string Id { get; set; } = new Guid().ToString();
 
         [Required]
-        [MaxLength(AttributesConstraints.CarCommentUserFullNameMaxLength)]
         public string UserFullName { get; set; }
 
         [Required]

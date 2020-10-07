@@ -16,14 +16,19 @@ namespace Socialley.Models
         [ForeignKey(nameof(User))]
         public string SenderId { get; set; }
         public virtual User Sender { get; set; }
+        [Required]
+        public string SenderUsername { get; set; }
+        public string SenderImageUrl { get; set; }
 
         [Required]
         [ForeignKey(nameof(User))]
         public string ReceiverId { get; set; }
         public virtual User Receiver { get; set; }
-
         [Required]
-        public DateTime SendOn { get; set; }
+        public string ReceiverUsername { get; set; }
+        public string RecieverImageUrl { get; set; }
+
+        public DateTime SentOn { get; set; }
 
         [Required]
         [MaxLength(AttributesConstraints.MessageTextMaxLength)]

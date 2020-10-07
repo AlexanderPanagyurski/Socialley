@@ -15,11 +15,6 @@ namespace Socialley.Models
         [Required,MaxLength(AttributesConstraints.GroupNameMaxLength)]
         public string Name { get; set; }
 
-        [ForeignKey(nameof(ChatMessage))]
-        public string ChatMessageId { get; set; }
-        public virtual ChatMessage ChatMessage { get; set; }
-
-
         public virtual ICollection<UserGroup> UsersGroups { get; set; } = new HashSet<UserGroup>();
     }
 }
