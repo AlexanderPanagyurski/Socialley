@@ -75,6 +75,8 @@ namespace Socialley.Models
 
         public virtual ICollection<ChatMessage> ChatMessages { get; set; } = new HashSet<ChatMessage>();
 
+        public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
+
         public virtual ICollection<UserGroup> UsersGroups { get; set; } = new HashSet<UserGroup>();
 
          public virtual ICollection<Post> Posts { get; set; } = new HashSet<Post>();

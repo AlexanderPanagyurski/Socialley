@@ -7,7 +7,7 @@ namespace Socialley.Common
     public static class AttributesConstraints
     {
         #region User
-        public const byte NameMaxLength = 50;
+        public const byte NameMaxLength = 20;
         public const byte EmailMaxLength = 32;
         public const byte PhoneNumberMaxLength = 10;
         public const short AboutMeMaxLength = short.MaxValue;

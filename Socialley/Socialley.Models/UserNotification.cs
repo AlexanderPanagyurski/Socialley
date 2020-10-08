@@ -1,4 +1,5 @@
-﻿using Socialley.Models.Enums;
+﻿using Socialley.Common;
+using Socialley.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,8 +19,12 @@ namespace Socialley.Models
 
 
         [Required]
-        [MaxLength(20)]
-        public string TargetUsername { get; set; }
+        [MaxLength(AttributesConstraints.NameMaxLength)]
+        public string TargetUserFirstName { get; set; }
+
+        [Required]
+        [MaxLength(AttributesConstraints.NameMaxLength)]
+        public string TargetUserLastName { get; set; }
 
         [Required]
         public DateTime CreatedOn { get; set; }

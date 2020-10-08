@@ -23,6 +23,8 @@ namespace Socialley.Models
 
         public int Likes { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         [Required, ForeignKey(nameof(User))]
         public string UserId { get; set; }
         public virtual User User { get; set; }
@@ -35,5 +37,6 @@ namespace Socialley.Models
 
         public virtual ICollection<FavouritePost> FavouritePosts { get; set; } = new HashSet<FavouritePost>();
 
+        public virtual ICollection<PostLike> PostsLikes { get; set; } = new HashSet<PostLike>();
     }
 }
