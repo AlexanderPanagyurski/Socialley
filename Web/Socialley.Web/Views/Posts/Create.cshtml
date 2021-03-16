@@ -1,0 +1,32 @@
+﻿@model Socialley.Web.ViewModels.Posts.PostCreateInputModel
+@{ this.ViewData["Title"] = "New forum post"; }
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+
+<script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea",
+        plugins: [
+            "image paste table link code media emoticons"
+        ],
+        height: 500
+    });
+</script>
+
+<form method="post" asp-action="Create"
+      enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-sm-6 form-group">
+            <label asp-for="Images"></label>
+            <input asp-for="Images" class="form-control" />
+            <span asp-validation-for="Images" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <hr />
+    <input type="submit" class="btn btn-primary" />
+</form>
