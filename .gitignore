@@ -350,4 +350,6 @@ MigrationBackup/
 .ionide/
 
 # Custom Ignores
-Configuration.cs
+DbConfiguration.cs
+appsettings.json
+images
