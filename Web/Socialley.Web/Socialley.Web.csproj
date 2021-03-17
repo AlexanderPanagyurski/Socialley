@@ -48,10 +48,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="wwwroot\css\media-preview-upload.css">
+    <Content Update="wwwroot\css\post-card.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\js\media-preview-upload-script.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\lib\moment\min\moment-with-locales.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
