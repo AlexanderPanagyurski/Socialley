@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -26,6 +26,7 @@
             this.postsService = postsService;
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return this.View();
