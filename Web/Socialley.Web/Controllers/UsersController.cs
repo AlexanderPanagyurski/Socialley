@@ -5,6 +5,7 @@
     using Socialley.Data.Models;
     using Socialley.Services.Data;
     using System;
+    using System.Threading.Tasks;
 
     public class UsersController : BaseController
     {
@@ -29,6 +30,16 @@
             viewModel.PagesCount = (int)Math.Ceiling((double)count / 6);
             viewModel.CurrentPage = page;
             return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Follow(string userId)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            await this.usersService.FollowUserAsync(userId, user.Id);
+
+            return this.Redirect(nameof(this.GetAllUsers));
         }
     }
 }
