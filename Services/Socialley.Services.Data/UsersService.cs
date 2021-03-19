@@ -1,10 +1,12 @@
 ﻿namespace Socialley.Services.Data
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Identity;
     using Socialley.Data.Common.Repositories;
     using Socialley.Data.Models;
     using Socialley.Web.ViewModels.Users;
-    using System.Linq;
 
     public class UsersService : IUsersService
     {
@@ -20,6 +22,15 @@
             this.usersRepository = usersRepository;
             this.postsRepository = postsRepository;
             this.userManager = userManager;
+        }
+
+        public async Task FollowUserAsync(string followerId, string userId)
+        {
+            var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
+            var follower = this.usersRepository.All().FirstOrDefault(x => x.Id == followerId);
+
+            user.Followers.Add(new UserFollower { UserId = follower.Id, FollowerId = user.Id });
+            await this.usersRepository.SaveChangesAsync();
         }
 
         public AllUsersViewModel GetAllUsers(int? take = null, int skip = 0)
