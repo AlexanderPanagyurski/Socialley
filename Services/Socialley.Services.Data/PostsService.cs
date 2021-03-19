@@ -18,13 +18,16 @@
 
         private readonly IDeletableEntityRepository<Post> postsRepository;
         private readonly IDeletableEntityRepository<UserImage> imagesRepository;
+        private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
 
         public PostsService(
             IDeletableEntityRepository<Post> postsRepository,
-            IDeletableEntityRepository<UserImage> imagesRepository)
+            IDeletableEntityRepository<UserImage> imagesRepository,
+            IDeletableEntityRepository<ApplicationUser> usersRepository)
         {
             this.postsRepository = postsRepository;
             this.imagesRepository = imagesRepository;
+            this.usersRepository = usersRepository;
         }
 
         public async Task<string> CreateAsync(PostCreateInputModel input, string userId, string imagePath)
@@ -79,6 +82,7 @@
                     CreatedOn = x.CreatedOn,
                 })
                 .ToArray();
+
             return posts;
         }
     }
