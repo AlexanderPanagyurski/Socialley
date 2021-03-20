@@ -19,6 +19,7 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
+    using Socialley.Data.Common.Repositories;
     using Socialley.Data.Models;
 
     [AllowAnonymous]
@@ -31,19 +32,22 @@
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
         private readonly IWebHostEnvironment environment;
+        private readonly IDeletableEntityRepository<UserFollower> usersFollows;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IWebHostEnvironment environment)
+            IWebHostEnvironment environment,
+            IDeletableEntityRepository<UserFollower> usersFollows)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
             this.environment = environment;
+            this.usersFollows = usersFollows;
         }
 
         [BindProperty]
@@ -117,6 +121,10 @@
                 }
 
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
+
+                await this.usersFollows.AddAsync(new UserFollower { UserId = user.Id, FollowerId = user.Id });
+
+                await this.usersFollows.SaveChangesAsync();
 
                 if (result.Succeeded)
                 {
