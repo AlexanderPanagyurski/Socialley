@@ -10,7 +10,7 @@
     using Socialley.Web.ViewModels.Posts;
 
     using Ganss.XSS;
-
+    using System.Collections.Generic;
 
     public class PostsService : IPostsService
     {
@@ -19,15 +19,21 @@
         private readonly IDeletableEntityRepository<Post> postsRepository;
         private readonly IDeletableEntityRepository<UserImage> imagesRepository;
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
+        private readonly IDeletableEntityRepository<UserFollower> followersRepository;
+        private readonly IDeletableEntityRepository<ImagePost> postsImagesRepository;
 
         public PostsService(
             IDeletableEntityRepository<Post> postsRepository,
             IDeletableEntityRepository<UserImage> imagesRepository,
-            IDeletableEntityRepository<ApplicationUser> usersRepository)
+            IDeletableEntityRepository<ApplicationUser> usersRepository,
+            IDeletableEntityRepository<UserFollower> followersRepository,
+            IDeletableEntityRepository<ImagePost> postsImagesRepository)
         {
             this.postsRepository = postsRepository;
             this.imagesRepository = imagesRepository;
             this.usersRepository = usersRepository;
+            this.followersRepository = followersRepository;
+            this.postsImagesRepository = postsImagesRepository;
         }
 
         public async Task<string> CreateAsync(PostCreateInputModel input, string userId, string imagePath)
@@ -68,22 +74,47 @@
 
         public PostViewModel[] GetPosts(string userId)
         {
-            var posts = this.postsRepository
-                .All()
-                .Where(x => x.UserId == userId)
-                .OrderByDescending(x => x.CreatedOn)
-                .Select(x => new PostViewModel
-                {
-                    UserUserName = x.User.UserName,
-                    ImageUrl = "/images/posts/" + x.ImagePosts.FirstOrDefault(x => x.UserId == userId).Id + "." + x.ImagePosts.FirstOrDefault(x => x.UserId == userId).Extension,
-                    Content = x.Content,
-                    UserProfileImageUrl = (x.User.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ?
-                    "/images/users/" + x.User.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.User.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
-                    CreatedOn = x.CreatedOn,
-                })
-                .ToArray();
+            //var posts = this.postsRepository
+            //    .All()
+            //    .Where(x => x.UserId == userId)
+            //    .OrderByDescending(x => x.CreatedOn)
+            //    .Select(x => new PostViewModel
+            //    {
+            //        UserUserName = x.User.UserName,
+            //        ImageUrl = "/images/posts/" + x.ImagePosts.FirstOrDefault(x => x.UserId == userId).Id + "." + x.ImagePosts.FirstOrDefault(x => x.UserId == userId).Extension,
+            //        Content = x.Content,
+            //        UserProfileImageUrl = (x.User.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ?
+            //        "/images/users/" + x.User.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.User.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
+            //        CreatedOn = x.CreatedOn,
+            //    })
+            //    .ToArray();
 
-            return posts;
+            var followings = this.followersRepository.All().Where(x => x.FollowerId == userId);
+            List<PostViewModel> posts = new List<PostViewModel>();
+
+            foreach (var user in followings)
+            {
+                var currUser = this.usersRepository.All().FirstOrDefault(x => x.Id == user.UserId);
+                var currUserPosts = this.postsRepository.All().Where(x => x.UserId == currUser.Id);
+                foreach (var post in currUserPosts)
+                {
+                    var currPostImage = this.postsImagesRepository.All().Where(x => x.PostId == post.Id);
+                    var postOwner = this.usersRepository.All().FirstOrDefault(x => x.Id == post.UserId);
+                    var postOwnerImages = this.imagesRepository.All().Where(x => x.UserId == postOwner.Id);
+                    var postOwnerPorifleImag = (postOwnerImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ?
+                        "/images/users/" + postOwnerImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + postOwnerImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : " /images/users/default-profile-icon.jpg";
+
+                    posts.Add(new PostViewModel
+                    {
+                        UserUserName = currUser.UserName,
+                        ImageUrl = "/images/posts/" + currPostImage.FirstOrDefault(x => x.PostId == post.Id).Id + "." + currPostImage.FirstOrDefault(x => x.PostId == post.Id).Extension,
+                        Content = post.Content,
+                        UserProfileImageUrl = postOwnerPorifleImag,
+                        CreatedOn = post.CreatedOn,
+                    });
+                }
+            }
+            return posts.OrderByDescending(x => x.CreatedOn).ToArray();
         }
     }
 }
