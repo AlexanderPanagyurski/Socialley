@@ -74,21 +74,6 @@
 
         public PostViewModel[] GetPosts(string userId)
         {
-            //var posts = this.postsRepository
-            //    .All()
-            //    .Where(x => x.UserId == userId)
-            //    .OrderByDescending(x => x.CreatedOn)
-            //    .Select(x => new PostViewModel
-            //    {
-            //        UserUserName = x.User.UserName,
-            //        ImageUrl = "/images/posts/" + x.ImagePosts.FirstOrDefault(x => x.UserId == userId).Id + "." + x.ImagePosts.FirstOrDefault(x => x.UserId == userId).Extension,
-            //        Content = x.Content,
-            //        UserProfileImageUrl = (x.User.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ?
-            //        "/images/users/" + x.User.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.User.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
-            //        CreatedOn = x.CreatedOn,
-            //    })
-            //    .ToArray();
-
             var followings = this.followersRepository.All().Where(x => x.FollowerId == userId);
             List<PostViewModel> posts = new List<PostViewModel>();
 
@@ -114,6 +99,7 @@
                     });
                 }
             }
+
             return posts.OrderByDescending(x => x.CreatedOn).ToArray();
         }
     }
