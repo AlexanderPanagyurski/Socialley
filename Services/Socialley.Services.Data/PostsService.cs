@@ -21,19 +21,22 @@
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IDeletableEntityRepository<UserFollower> followersRepository;
         private readonly IDeletableEntityRepository<ImagePost> postsImagesRepository;
+        private readonly IDeletableEntityRepository<FavoritePost> postsLikesRepository;
 
         public PostsService(
             IDeletableEntityRepository<Post> postsRepository,
             IDeletableEntityRepository<UserImage> imagesRepository,
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<UserFollower> followersRepository,
-            IDeletableEntityRepository<ImagePost> postsImagesRepository)
+            IDeletableEntityRepository<ImagePost> postsImagesRepository,
+            IDeletableEntityRepository<FavoritePost> postsLikesRepository)
         {
             this.postsRepository = postsRepository;
             this.imagesRepository = imagesRepository;
             this.usersRepository = usersRepository;
             this.followersRepository = followersRepository;
             this.postsImagesRepository = postsImagesRepository;
+            this.postsLikesRepository = postsLikesRepository;
         }
 
         public async Task<string> CreateAsync(PostCreateInputModel input, string userId, string imagePath)
@@ -88,9 +91,12 @@
                     var postOwnerImages = this.imagesRepository.All().Where(x => x.UserId == postOwner.Id);
                     var postOwnerPorifleImag = (postOwnerImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ?
                         "/images/users/" + postOwnerImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + postOwnerImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : " /images/users/default-profile-icon.jpg";
+                    var postLikesCount = this.postsLikesRepository.All().Count(x => x.PostId == post.Id);
 
                     posts.Add(new PostViewModel
                     {
+                        Id = post.Id,
+                        FavoritesCount = this.GetPostsLikes(post.Id),
                         UserUserName = currUser.UserName,
                         ImageUrl = "/images/posts/" + currPostImage.FirstOrDefault(x => x.PostId == post.Id).Id + "." + currPostImage.FirstOrDefault(x => x.PostId == post.Id).Extension,
                         Content = post.Content,
@@ -101,6 +107,11 @@
             }
 
             return posts.OrderByDescending(x => x.CreatedOn).ToArray();
+        }
+
+        private int GetPostsLikes(string postId)
+        {
+            return this.postsLikesRepository.All().Count(x => x.PostId == postId);
         }
     }
 }

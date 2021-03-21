@@ -13,15 +13,18 @@
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IDeletableEntityRepository<Post> postsRepository;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IDeletableEntityRepository<UserFollower> followersRepository;
 
         public UsersService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<Post> postsRepository,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IDeletableEntityRepository<UserFollower> followersRepository)
         {
             this.usersRepository = usersRepository;
             this.postsRepository = postsRepository;
             this.userManager = userManager;
+            this.followersRepository = followersRepository;
         }
 
         public async Task FollowUserAsync(string followerId, string userId)
@@ -46,6 +49,8 @@
                         .OrderByDescending(x => x.Posts.Count())
                         .Select(x => new UserViewModel
                         {
+                            FollowersCount = this.followersRepository.All().Count(y => y.UserId == x.Id),
+                            FollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == x.Id),
                             Email = x.Email,
                             PostsCount = x.Posts.Count(),
                             ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
@@ -66,6 +71,7 @@
                         .Select(x => new UserViewModel
                         {
                             Email = x.Email,
+                            FollowersCount = x.Followers.Count(),
                             PostsCount = x.Posts.Count(),
                             ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
                             UserId = x.Id,

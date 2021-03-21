@@ -109,3 +109,12 @@ body {
     border: 5px solid white;
     border-radius: 50%;
 }
+
+.fa-heart {
+    color:lightgrey;
+    font-size:25px;
+}
+
+.fa-heart:hover{
+    color:red;
+}

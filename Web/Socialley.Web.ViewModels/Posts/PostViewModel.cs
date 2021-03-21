@@ -6,6 +6,10 @@
 
     public class PostViewModel
     {
+        public string Id { get; set; }
+
+        public int FavoritesCount { get; set; }
+
         public string UserUserName { get; set; }
 
         public string UserProfileImageUrl { get; set; }

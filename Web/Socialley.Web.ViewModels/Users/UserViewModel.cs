@@ -10,6 +10,10 @@
 
         public int PostsCount { get; set; }
 
+        public int FollowersCount { get; set; }
+
+        public int FollowingsCount { get; set; }
+
         public string Email { get; set; }
     }
 }
