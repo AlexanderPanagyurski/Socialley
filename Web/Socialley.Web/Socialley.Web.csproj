@@ -51,6 +51,12 @@
     <Content Update="wwwroot\css\post-card.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Update="wwwroot\css\site.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\js\like-post.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\js\media-preview-upload-script.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
