@@ -1,7 +1,7 @@
 ﻿namespace Socialley.Services.Data
 {
     using System.Threading.Tasks;
-    using Socialley.Web.ViewModels;
+
     using Socialley.Web.ViewModels.Posts;
 
     public interface IPostsService

@@ -1,16 +1,15 @@
 ﻿namespace Socialley.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Ganss.XSS;
     using Socialley.Data.Common.Repositories;
     using Socialley.Data.Models;
     using Socialley.Web.ViewModels.Posts;
-
-    using Ganss.XSS;
-    using System.Collections.Generic;
 
     public class PostsService : IPostsService
     {

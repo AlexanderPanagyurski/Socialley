@@ -52,17 +52,9 @@ Hero
                                 @if (this.User.Identity.IsAuthenticated)
                                 {
                                     var id = $"\"{post.Id}\"";
-                                    @*<div class="row">
-                                        <div class="col float-left pt-2 px-5">
-                                            <form id="favoritesForm" method="post"></form>
-                                            <a href="#" onclick="addToFavorites(@id); return false"><i class="fa fa-heart"></i></a>
-                                            <div id="favoritesCount">@post.FavoritesCount</div>
-                                        </div>
-                                        <div class="col float-right px-5"> <button type="button" class="btn btn-primary float-right" onclick="showAddCommentForm(null)"><i class="fa fa-comment-dots"></i>&nbsp; Comment</button> </div>
-                                    </div>*@
                                     <div class="clearfix row">
                                         <form id="favoritesForm" method="post"></form>
-                                        <div class="col-1 ml-2 mt-2 mb-2">
+                                        <div class="col-1 ml-4 mt-2 mb-2">
                                             <a href="#" onclick="addToFavorites(@id); return false"><i class="fa fa-heart"></i></a>
                                         </div>
                                          <div class="col-1 mt-2">
