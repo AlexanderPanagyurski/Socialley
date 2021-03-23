@@ -21,5 +21,7 @@
         public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 
         public DateTime CreatedOn { get; set; }
+
+        public bool IsLiked { get; set; }
     }
 }

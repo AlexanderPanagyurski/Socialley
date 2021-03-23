@@ -1,6 +1,7 @@
 ﻿namespace Socialley.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -8,9 +9,6 @@
     using Socialley.Data.Common.Repositories;
     using Socialley.Data.Models;
     using Socialley.Web.ViewModels.Posts;
-
-    using Ganss.XSS;
-    using System.Collections.Generic;
 
     public class PostsService : IPostsService
     {
@@ -96,22 +94,18 @@
                     posts.Add(new PostViewModel
                     {
                         Id = post.Id,
-                        FavoritesCount = this.GetPostsLikes(post.Id),
+                        FavoritesCount = postLikesCount,
                         UserUserName = currUser.UserName,
                         ImageUrl = "/images/posts/" + currPostImage.FirstOrDefault(x => x.PostId == post.Id).Id + "." + currPostImage.FirstOrDefault(x => x.PostId == post.Id).Extension,
                         Content = post.Content,
                         UserProfileImageUrl = postOwnerPorifleImag,
                         CreatedOn = post.CreatedOn,
+                        IsLiked = this.postsLikesRepository.All().Any(x => x.PostId == post.Id && x.UserId == userId),
                     });
                 }
             }
 
             return posts.OrderByDescending(x => x.CreatedOn).ToArray();
-        }
-
-        private int GetPostsLikes(string postId)
-        {
-            return this.postsLikesRepository.All().Count(x => x.PostId == postId);
         }
     }
 }
