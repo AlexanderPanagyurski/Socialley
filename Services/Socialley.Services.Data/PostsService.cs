@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Ganss.XSS;
     using Socialley.Data.Common.Repositories;
     using Socialley.Data.Models;
     using Socialley.Web.ViewModels.Posts;

@@ -10,6 +10,6 @@
 
         int GetUsersCount();
 
-        Task FollowUserAsync(string followerId,string userId);
+        Task FollowUserAsync(string followerId, string userId);
     }
 }
