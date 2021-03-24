@@ -28,7 +28,7 @@
                 <img src="@profileImage" width="40" height="40" class="rounded-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">My profile</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="UserProfile">My profile</a>
                 <a class="dropdown-item" asp-area="" asp-controller="Posts" asp-action="Create">Create post</a>
                 <a class="dropdown-item" href="#">My posts</a>
                 <a class="dropdown-item" href="#">Favourite posts</a>

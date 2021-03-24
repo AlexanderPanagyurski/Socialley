@@ -1,0 +1,14 @@
+﻿@model Socialley.Web.ViewModels.Users.UserProfileViewModel
+<div class="container">
+    <br />
+    <div class="row">
+        @foreach (var post in this.Model.UserPosts)
+        {
+            <div class="col-sm-4 mt-4">
+                <div class="card text-white">
+                    <img src="@post.ImageUrl" style="height:320px; object-fit:cover;" class="card-img rounded">
+                </div>
+            </div>
+        }
+    </div>
+</div>
