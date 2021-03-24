@@ -41,5 +41,12 @@
 
             return this.Redirect(nameof(this.GetAllUsers));
         }
+
+        public async Task<IActionResult> UserProfile()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var viewModel = this.usersService.GetUserProfile(user.Id);
+            return this.View(viewModel);
+        }
     }
 }

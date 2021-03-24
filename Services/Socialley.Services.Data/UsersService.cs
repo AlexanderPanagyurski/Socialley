@@ -1,5 +1,6 @@
 ﻿namespace Socialley.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -14,17 +15,20 @@
         private readonly IDeletableEntityRepository<Post> postsRepository;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDeletableEntityRepository<UserFollower> followersRepository;
+        private readonly IDeletableEntityRepository<ImagePost> postsImagesRepository;
 
         public UsersService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<Post> postsRepository,
             UserManager<ApplicationUser> userManager,
-            IDeletableEntityRepository<UserFollower> followersRepository)
+            IDeletableEntityRepository<UserFollower> followersRepository,
+            IDeletableEntityRepository<ImagePost> postsImagesRepository)
         {
             this.usersRepository = usersRepository;
             this.postsRepository = postsRepository;
             this.userManager = userManager;
             this.followersRepository = followersRepository;
+            this.postsImagesRepository = postsImagesRepository;
         }
 
         public async Task FollowUserAsync(string followerId, string userId)
@@ -71,7 +75,8 @@
                         .Select(x => new UserViewModel
                         {
                             Email = x.Email,
-                            FollowersCount = x.Followers.Count(),
+                            FollowersCount = this.followersRepository.All().Count(y => y.UserId == x.Id),
+                            FollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == x.Id),
                             PostsCount = x.Posts.Count(),
                             ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
                             UserId = x.Id,
@@ -79,6 +84,34 @@
                         })
                         .ToArray(),
                 };
+            }
+
+            return viewModel;
+        }
+
+        public UserProfileViewModel GetUserProfile(string userId)
+        {
+            var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
+            var userPostsImages = this.postsImagesRepository.All().Where(x => x.UserId == userId);
+            var userPosts = this.postsRepository.All().Where(x => x.UserId == userId);
+
+            var viewModel = new UserProfileViewModel
+            {
+                PostsCount = this.postsRepository.All().Count(x => x.UserId == userId),
+                FollowersCount = this.followersRepository.All().Count(y => y.UserId == userId),
+                FollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == userId),
+                ProfileImageUrl = (user.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + user.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." +
+                user.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
+            };
+            viewModel.UserPosts = new List<UserPostsViewModel>();
+
+            foreach (var userPost in userPosts)
+            {
+                viewModel.UserPosts.Add(new UserPostsViewModel
+                {
+                    ImageUrl = "/images/posts/" + userPostsImages.FirstOrDefault(x => x.PostId == userPost.Id).Id + "." + userPostsImages.FirstOrDefault(x => x.PostId == userPost.Id).Extension,
+                    PostsId = userPost.Id,
+                });
             }
 
             return viewModel;
