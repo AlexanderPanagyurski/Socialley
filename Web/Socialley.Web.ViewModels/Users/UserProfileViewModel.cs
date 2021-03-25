@@ -6,6 +6,8 @@
 
     public class UserProfileViewModel
     {
+        public string UserName { get; set; }
+
         public string ProfileImageUrl { get; set; }
 
         public int FollowersCount { get; set; }

@@ -101,6 +101,7 @@
 
             var viewModel = new UserProfileViewModel
             {
+                UserName = user.UserName,
                 PostsCount = this.postsRepository.All().Count(x => x.UserId == userId),
                 FollowersCount = this.followersRepository.All().Count(y => y.UserId == userId),
                 FollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == userId),
