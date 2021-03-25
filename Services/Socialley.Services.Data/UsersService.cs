@@ -16,19 +16,22 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDeletableEntityRepository<UserFollower> followersRepository;
         private readonly IDeletableEntityRepository<ImagePost> postsImagesRepository;
+        private readonly IDeletableEntityRepository<UserImage> userImagesRepository;
 
         public UsersService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<Post> postsRepository,
             UserManager<ApplicationUser> userManager,
             IDeletableEntityRepository<UserFollower> followersRepository,
-            IDeletableEntityRepository<ImagePost> postsImagesRepository)
+            IDeletableEntityRepository<ImagePost> postsImagesRepository,
+            IDeletableEntityRepository<UserImage> userImagesRepository)
         {
             this.usersRepository = usersRepository;
             this.postsRepository = postsRepository;
             this.userManager = userManager;
             this.followersRepository = followersRepository;
             this.postsImagesRepository = postsImagesRepository;
+            this.userImagesRepository = userImagesRepository;
         }
 
         public async Task FollowUserAsync(string followerId, string userId)
@@ -94,14 +97,15 @@
             var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
             var userPostsImages = this.postsImagesRepository.All().Where(x => x.UserId == userId);
             var userPosts = this.postsRepository.All().Where(x => x.UserId == userId);
+            var userImages = this.userImagesRepository.All().Where(x => x.UserId == userId);
 
             var viewModel = new UserProfileViewModel
             {
                 PostsCount = this.postsRepository.All().Count(x => x.UserId == userId),
                 FollowersCount = this.followersRepository.All().Count(y => y.UserId == userId),
                 FollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == userId),
-                ProfileImageUrl = (user.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + user.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." +
-                user.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
+                ProfileImageUrl = (userImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + userImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." +
+                userImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
             };
             viewModel.UserPosts = new List<UserPostsViewModel>();
 
