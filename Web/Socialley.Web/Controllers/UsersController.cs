@@ -1,11 +1,12 @@
 ﻿namespace Socialley.Web.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Socialley.Data.Models;
     using Socialley.Services.Data;
-    using System;
-    using System.Threading.Tasks;
 
     public class UsersController : BaseController
     {
@@ -46,6 +47,14 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
             var viewModel = this.usersService.GetUserProfile(user.Id);
+            return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> FavouritePosts()
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var viewModel = this.usersService.GetFavouritePosts(user.Id);
+
             return this.View(viewModel);
         }
     }

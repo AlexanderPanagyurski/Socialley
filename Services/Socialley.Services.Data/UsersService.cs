@@ -17,6 +17,7 @@
         private readonly IDeletableEntityRepository<UserFollower> followersRepository;
         private readonly IDeletableEntityRepository<ImagePost> postsImagesRepository;
         private readonly IDeletableEntityRepository<UserImage> userImagesRepository;
+        private readonly IDeletableEntityRepository<FavoritePost> userFavouritePostsRepository;
 
         public UsersService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
@@ -24,7 +25,8 @@
             UserManager<ApplicationUser> userManager,
             IDeletableEntityRepository<UserFollower> followersRepository,
             IDeletableEntityRepository<ImagePost> postsImagesRepository,
-            IDeletableEntityRepository<UserImage> userImagesRepository)
+            IDeletableEntityRepository<UserImage> userImagesRepository,
+            IDeletableEntityRepository<FavoritePost> userFavouritePostsRepository)
         {
             this.usersRepository = usersRepository;
             this.postsRepository = postsRepository;
@@ -32,6 +34,7 @@
             this.followersRepository = followersRepository;
             this.postsImagesRepository = postsImagesRepository;
             this.userImagesRepository = userImagesRepository;
+            this.userFavouritePostsRepository = userFavouritePostsRepository;
         }
 
         public async Task FollowUserAsync(string followerId, string userId)
@@ -87,6 +90,36 @@
                         })
                         .ToArray(),
                 };
+            }
+
+            return viewModel;
+        }
+
+        public UserProfileViewModel GetFavouritePosts(string userId)
+        {
+            var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
+            var userPostsImages = this.postsImagesRepository.All();
+            var userImages = this.userImagesRepository.All().Where(x => x.UserId == userId);
+            var userFavouritePosts = this.userFavouritePostsRepository.All().Where(x => x.UserId == userId);
+
+            var viewModel = new UserProfileViewModel
+            {
+                UserName = user.UserName,
+                PostsCount = this.postsRepository.All().Count(x => x.UserId == userId),
+                FollowersCount = this.followersRepository.All().Count(y => y.UserId == userId),
+                FollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == userId),
+                ProfileImageUrl = (userImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + userImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." +
+                userImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
+            };
+            viewModel.UserPosts = new List<UserPostsViewModel>();
+
+            foreach (var userPost in userFavouritePosts)
+            {
+                viewModel.UserPosts.Add(new UserPostsViewModel
+                {
+                    ImageUrl = "/images/posts/" + userPostsImages.FirstOrDefault(x => x.PostId == userPost.PostId).Id + "." + userPostsImages.FirstOrDefault(x => x.PostId == userPost.PostId).Extension,
+                    PostsId = userPost.PostId,
+                });
             }
 
             return viewModel;
