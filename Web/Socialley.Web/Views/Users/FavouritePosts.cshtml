@@ -1,0 +1,27 @@
+﻿@model Socialley.Web.ViewModels.Users.UserProfileViewModel
+
+<div class="card-body">
+    <div class="d-flex flex-column align-items-center text-center">
+        <img src="@this.Model.ProfileImageUrl" alt="Admin" class="rounded-circle" width="150">
+        <div class="mt-3">
+            <h4>@this.Model.UserName</h4>
+            <div class="row">
+                <p class="text-secondary pl-4 pt-4 pr-4 d-inline-flex">Posts: @this.Model.PostsCount</p>
+                <p class="text-secondary pl-4 pt-4 pr-4 d-inline-flex">Followers: @this.Model.FollowersCount</p>
+                <p class="text-secondary pl-4 pt-4 pr-4 d-inline-flex">Followings: @this.Model.FollowingsCount</p>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="container">
+    <div class="row">
+        @foreach (var post in this.Model.UserPosts)
+        {
+<div class="col-sm-4 mt-4">
+    <div class="card text-white">
+        <img src="@post.ImageUrl" style="height:320px; object-fit:cover;" class="card-img rounded">
+    </div>
+</div>}
+    </div>
+</div>

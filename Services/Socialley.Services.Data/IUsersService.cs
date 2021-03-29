@@ -13,5 +13,7 @@
         Task FollowUserAsync(string followerId, string userId);
 
         UserProfileViewModel GetUserProfile(string userId);
+
+        UserProfileViewModel GetFavouritePosts(string userId);
     }
 }
