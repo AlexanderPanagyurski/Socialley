@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Socialley.Data.Models;
@@ -24,6 +24,7 @@
             this.userManager = userManager;
         }
 
+        [Authorize]
         public IActionResult GetAllUsers(int page = 1)
         {
             var viewModel = this.usersService.GetAllUsers(6, (page - 1) * 6);
@@ -34,6 +35,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Follow(string userId)
         {
             var user = await this.userManager.GetUserAsync(this.User);
@@ -43,6 +45,7 @@
             return this.Redirect(nameof(this.GetAllUsers));
         }
 
+        [Authorize]
         public async Task<IActionResult> UserProfile()
         {
             var user = await this.userManager.GetUserAsync(this.User);
