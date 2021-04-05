@@ -3,17 +3,13 @@
     this.ViewData["Title"] = "Home Page";
 }
 <link href="~/css/post-card.css" rel="stylesheet" />
-<!-- ==============================================
-Hero
-=============================================== -->
-
 <section class="hero">
+    <a href="#" id="toTopBtn" class="cd-top text-replace js-cd-top cd-top--is-visible cd-top--fade-out" data-abc="true"></a>
     <div class="container">
         @foreach (var post in this.Model)
         {
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
-
                     <div class="cardbox shadow-lg bg-white">
 
                         <div class="cardbox-heading">
@@ -102,4 +98,24 @@ Hero
         }
     </div><!--/ container -->
 </section>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 20) {
+                    $('#toTopBtn').fadeIn();
+                } else {
+                    $('#toTopBtn').fadeOut();
+                }
+            });
+
+            $('#toTopBtn').click(function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 1000);
+                return false;
+            });
+        });
+    </script>
+}
 
