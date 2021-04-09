@@ -1,10 +1,12 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
 .navbar-brand {
     font-family: 'Dancing Script', cursive;
-    font-size:30px;
+    font-size: 30px;
 }
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -76,6 +78,7 @@ body {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
 }
+
 .container {
     height: 100%;
     align-content: center;
@@ -115,13 +118,13 @@ body {
 }
 
 .fa-heart {
-    color:lightgrey;
-    font-size:25px;
+    color: lightgrey;
+    font-size: 25px;
 }
 
-.fa-heart:hover{
-    color:red;
-}
+    .fa-heart:hover {
+        color: red;
+    }
 
 .btn:focus, .btn:active, button:focus, button:active {
     outline: none !important;
@@ -185,4 +188,44 @@ body {
     background: url(https://res.cloudinary.com/dxfq3iotg/image/upload/v1571057658/cd-top-arrow.svg) no-repeat center 50%;
     background-color: hsla(5, 76%, 62%, .8);
     background-color: hsla(var(--cd-color-3-h), var(--cd-color-3-s), var(--cd-color-3-l), 0.8);
+}
+
+.fa-cog {
+    color: lightgrey;
+    font-size: 22px;
+}
+
+    .fa-cog:hover {
+        cursor: pointer;
+    }
+
+.image-likes {
+    margin: 45%;
+}
+
+.thumbnail:hover {
+    filter: brightness(80%);
+}
+
+.likes {
+    margin-top: 39%;
+    margin-left: 50%;
+    color: white;
+    font-size: 20px;
+}
+
+.likes {
+    display: none;
+}
+
+.card-img-overlay i {
+    display: none;
+}
+
+.thumbnail:hover .likes {
+    display: block;
+}
+
+.thumbnail:hover .card-img-overlay i {
+    display: block;
 }
