@@ -145,10 +145,12 @@
 
             foreach (var userPost in userPosts)
             {
+                var currUserPostLikes = this.userFavouritePostsRepository.All().Count(x => x.PostId == userPost.Id);
                 viewModel.UserPosts.Add(new UserPostsViewModel
                 {
                     ImageUrl = "/images/posts/" + userPostsImages.FirstOrDefault(x => x.PostId == userPost.Id).Id + "." + userPostsImages.FirstOrDefault(x => x.PostId == userPost.Id).Extension,
                     PostsId = userPost.Id,
+                    PostLikes = currUserPostLikes,
                 });
             }
 

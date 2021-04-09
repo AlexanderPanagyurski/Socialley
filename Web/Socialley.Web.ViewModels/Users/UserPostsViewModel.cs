@@ -9,5 +9,7 @@
         public string ImageUrl { get; set; }
 
         public string PostsId { get; set; }
+
+        public int PostLikes { get; set; }
     }
 }

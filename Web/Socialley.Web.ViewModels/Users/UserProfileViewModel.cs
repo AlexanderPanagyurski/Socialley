@@ -17,5 +17,6 @@
         public int PostsCount { get; set; }
 
         public IList<UserPostsViewModel> UserPosts { get; set; } = new List<UserPostsViewModel>();
+
     }
 }
