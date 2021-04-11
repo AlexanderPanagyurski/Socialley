@@ -24,6 +24,14 @@
            data-image="@post.ImageUrl"
            data-target="#image-gallery">
             <img src="@post.ImageUrl" style="height:320px; object-fit:cover;" class="card-img rounded opacity img-fluid z-depth-1" id="myImg">
+            <div class="row flex-column">
+                <div class="col card-img-overlay">
+                    <i class="fas fa-heart image-likes"></i>
+                </div>
+                <div class="col card-img-overlay likes">
+                    @post.PostLikes
+                </div>
+            </div>
         </a>
     </div>
     <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -53,6 +61,7 @@
 </div>}
     </div>
 </div>
+
 @section Scripts{
     <script>
         $(document).ready(function () {
