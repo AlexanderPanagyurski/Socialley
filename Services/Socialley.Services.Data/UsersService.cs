@@ -100,7 +100,10 @@
             var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
             var userPostsImages = this.postsImagesRepository.All();
             var userImages = this.userImagesRepository.All().Where(x => x.UserId == userId);
-            var userFavouritePosts = this.userFavouritePostsRepository.All().Where(x => x.UserId == userId);
+            var userFavouritePosts = this.userFavouritePostsRepository.
+                All().
+                Where(x => x.UserId == userId).
+                OrderByDescending(x => x.CreatedOn);
 
             var viewModel = new UserProfileViewModel
             {
@@ -115,10 +118,12 @@
 
             foreach (var userPost in userFavouritePosts)
             {
+                var currUserPostLikes = this.userFavouritePostsRepository.All().Count(x => x.PostId == userPost.PostId);
                 viewModel.UserPosts.Add(new UserPostsViewModel
                 {
                     ImageUrl = "/images/posts/" + userPostsImages.FirstOrDefault(x => x.PostId == userPost.PostId).Id + "." + userPostsImages.FirstOrDefault(x => x.PostId == userPost.PostId).Extension,
                     PostsId = userPost.PostId,
+                    PostLikes = currUserPostLikes,
                 });
             }
 
@@ -129,7 +134,10 @@
         {
             var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
             var userPostsImages = this.postsImagesRepository.All().Where(x => x.UserId == userId);
-            var userPosts = this.postsRepository.All().Where(x => x.UserId == userId);
+            var userPosts = this.postsRepository
+                .All()
+                .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.CreatedOn);
             var userImages = this.userImagesRepository.All().Where(x => x.UserId == userId);
 
             var viewModel = new UserProfileViewModel
