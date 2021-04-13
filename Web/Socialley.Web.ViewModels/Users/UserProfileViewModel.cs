@@ -19,5 +19,7 @@
         public IList<UserPostsViewModel> UserPosts { get; set; } = new List<UserPostsViewModel>();
 
         public IList<UserFollowingsViewModel> UserFollowings { get; set; }
+
+        public IList<UserFollowersViewModel> UserFollowers { get; set; }
     }
 }
