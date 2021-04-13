@@ -139,6 +139,7 @@
                 .Where(x => x.UserId == userId)
                 .OrderByDescending(x => x.CreatedOn);
             var userImages = this.userImagesRepository.All().Where(x => x.UserId == userId);
+            var userFollowings = this.followersRepository.All().Where(x => x.FollowerId == userId);
 
             var viewModel = new UserProfileViewModel
             {
@@ -150,6 +151,7 @@
                 userImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
             };
             viewModel.UserPosts = new List<UserPostsViewModel>();
+            viewModel.UserFollowings = new List<UserFollowingsViewModel>();
 
             foreach (var userPost in userPosts)
             {
@@ -159,6 +161,17 @@
                     ImageUrl = "/images/posts/" + userPostsImages.FirstOrDefault(x => x.PostId == userPost.Id).Id + "." + userPostsImages.FirstOrDefault(x => x.PostId == userPost.Id).Extension,
                     PostsId = userPost.Id,
                     PostLikes = currUserPostLikes,
+                });
+            }
+
+            foreach (var userFollowing in userFollowings)
+            {
+                var currUser = this.usersRepository.All().FirstOrDefault(x => x.Id == userFollowing.UserId);
+                viewModel.UserFollowings.Add(new UserFollowingsViewModel
+                {
+                    UserName = currUser.UserName,
+                    UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id) != null) ? "/images/users/" + this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id).Id + "." +
+                this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id).Extension : "/images/users/default-profile-icon.jpg",
                 });
             }
 
