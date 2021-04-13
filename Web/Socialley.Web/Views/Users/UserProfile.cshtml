@@ -11,8 +11,8 @@
             </div>
             <div class="row">
                 <p class="text-secondary pl-4 pt-4 pr-4 d-inline-flex">Posts: @this.Model.PostsCount</p>
-                <a data-toggle="modal" data-target="#user-followers"><p class="text-secondary pl-4 pt-4 pr-4 d-inline-flex">Followers: @this.Model.FollowersCount</p></a>
-                <a data-toggle="modal" data-target="#user-followings"><p class="text-secondary pl-4 pt-4 pr-4 d-inline-flex">Followings: @this.Model.FollowingsCount</p></a>
+                <a data-toggle="modal" data-target="#user-followers"><p class="followers-paragraph text-secondary pl-4 pt-4 pr-4 d-inline-flex">Followers: @this.Model.FollowersCount</p></a>
+                <a data-toggle="modal" data-target="#user-followings"><p class="followings-paragraph text-secondary pl-4 pt-4 pr-4 d-inline-flex">Followings: @this.Model.FollowingsCount</p></a>
             </div>
         </div>
     </div>
@@ -115,7 +115,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Followings</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Followers</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
