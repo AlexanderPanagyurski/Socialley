@@ -11,7 +11,7 @@
             </div>
             <div class="row">
                 <p class="text-secondary pl-4 pt-4 pr-4 d-inline-flex">Posts: @this.Model.PostsCount</p>
-                <p class="text-secondary pl-4 pt-4 pr-4 d-inline-flex">Followers: @this.Model.FollowersCount</p>
+                <a data-toggle="modal" data-target="#user-followers"><p class="text-secondary pl-4 pt-4 pr-4 d-inline-flex">Followers: @this.Model.FollowersCount</p></a>
                 <a data-toggle="modal" data-target="#user-followings"><p class="text-secondary pl-4 pt-4 pr-4 d-inline-flex">Followings: @this.Model.FollowingsCount</p></a>
             </div>
         </div>
@@ -103,6 +103,31 @@
                         <div class="flex-fill pl-3 pr-3"><div><a href="#" class="text-dark font-weight-600">@userFollowing.UserName</a></div></div> <a href="#" class="btn btn-outline-primary">Follow</a>
                     </div>
                 </div>
+            }
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="user-followers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Followings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @foreach (var userFollower in this.Model.UserFollowers)
+            {
+                <div class="modal-body">
+                    <div class="list-group-item d-flex align-items-center">
+                        <img src="@userFollower.UserProfileUrl" alt="" width="50px" class="rounded-circle">
+                        <div class="flex-fill pl-3 pr-3"><div><a href="#" class="text-dark font-weight-600">@userFollower.UserName</a></div></div> <a href="#" class="btn btn-outline-primary">Follow</a>
+                    </div>
+                </div>            
             }
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

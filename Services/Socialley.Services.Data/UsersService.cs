@@ -140,6 +140,7 @@
                 .OrderByDescending(x => x.CreatedOn);
             var userImages = this.userImagesRepository.All().Where(x => x.UserId == userId);
             var userFollowings = this.followersRepository.All().Where(x => x.FollowerId == userId);
+            var userFollowers = this.followersRepository.All().Where(x => x.UserId == userId);
 
             var viewModel = new UserProfileViewModel
             {
@@ -152,6 +153,7 @@
             };
             viewModel.UserPosts = new List<UserPostsViewModel>();
             viewModel.UserFollowings = new List<UserFollowingsViewModel>();
+            viewModel.UserFollowers = new List<UserFollowersViewModel>();
 
             foreach (var userPost in userPosts)
             {
@@ -172,6 +174,17 @@
                     UserName = currUser.UserName,
                     UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id) != null) ? "/images/users/" + this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id).Id + "." +
                 this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id).Extension : "/images/users/default-profile-icon.jpg",
+                });
+            }
+
+            foreach (var userFollower in userFollowers)
+            {
+                var currUser = this.usersRepository.All().FirstOrDefault(x => x.Id == userFollower.FollowerId);
+                viewModel.UserFollowers.Add(new UserFollowersViewModel
+                {
+                    UserName = currUser.UserName,
+                    UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId) != null) ? "/images/users/" + this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId).Id + "." +
+                this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId).Extension : "/images/users/default-profile-icon.jpg",
                 });
             }
 
