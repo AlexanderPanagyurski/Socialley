@@ -229,3 +229,7 @@ body {
 .thumbnail:hover .card-img-overlay i {
     display: block;
 }
+
+.followings-paragraph, .followers-paragraph:hover {
+    cursor: pointer
+}
