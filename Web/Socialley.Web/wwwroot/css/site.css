@@ -233,3 +233,7 @@ body {
 .followings-paragraph, .followers-paragraph:hover {
     cursor: pointer
 }
+
+.modal-follow{
+    height:350px;
+}
