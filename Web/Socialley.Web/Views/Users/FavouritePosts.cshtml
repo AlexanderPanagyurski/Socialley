@@ -93,23 +93,21 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @foreach (var userFollowing in this.Model.UserFollowings)
-            {
-<div class="modal-body">
-    <div class="list-group-item d-flex align-items-center">
-        <img src="@userFollowing.UserProfileUrl" alt="" width="50px" class="rounded-circle">
-        <div class="flex-fill pl-3 pr-3"><div><a href="#" class="text-dark font-weight-600">@userFollowing.UserName</a></div></div> <a href="#" class="btn btn-outline-primary">Follow</a>
-    </div>
-</div>            }
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="modal-body modal-follow">
+                @foreach (var userFollowing in this.Model.UserFollowings)
+                {
+                    <div class="list-group-item d-flex align-items-center">
+                        <img src="@userFollowing.UserProfileUrl" alt="" width="50px" class="rounded-circle">
+                        <div class="flex-fill pl-3 pr-3"><div><a href="#" class="text-dark font-weight-600">@userFollowing.UserName</a></div></div> <a href="#" class="btn btn-outline-primary">Follow</a>
+                    </div>
+                }
             </div>
         </div>
     </div>
 </div>
 
 <div class="modal fade" id="user-followers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Followers</h5>
@@ -117,16 +115,14 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @foreach (var userFollower in this.Model.UserFollowers)
-            {
-<div class="modal-body">
-    <div class="list-group-item d-flex align-items-center">
-        <img src="@userFollower.UserProfileUrl" alt="" width="50px" class="rounded-circle">
-        <div class="flex-fill pl-3 pr-3"><div><a href="#" class="text-dark font-weight-600">@userFollower.UserName</a></div></div> <a href="#" class="btn btn-outline-primary">Follow</a>
-    </div>
-</div>            }
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="modal-body modal-follow">
+                @foreach (var userFollower in this.Model.UserFollowers)
+                {
+                    <div class="list-group-item d-flex align-items-sm-center">
+                        <img src="@userFollower.UserProfileUrl" alt="" width="50px" class="rounded-circle">
+                        <div class="flex-fill pl-3 pr-3"><div><a href="#" class="text-dark font-weight-600">@userFollower.UserName</a></div></div> <a href="#" class="btn btn-outline-primary">Follow</a>
+                    </div>
+                }
             </div>
         </div>
     </div>
