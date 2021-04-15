@@ -46,10 +46,16 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> UserProfile()
+        public async Task<IActionResult> MyProfile()
         {
             var user = await this.userManager.GetUserAsync(this.User);
             var viewModel = this.usersService.GetUserProfile(user.Id);
+            return this.View(viewModel);
+        }
+
+        public IActionResult UserProfile(string userId)
+        {
+            var viewModel = this.usersService.GetUserProfile(userId);
             return this.View(viewModel);
         }
 
