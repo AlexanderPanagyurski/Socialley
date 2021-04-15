@@ -130,11 +130,13 @@
                     PostLikes = currUserPostLikes,
                 });
             }
+
             foreach (var userFollowing in userFollowings)
             {
                 var currUser = this.usersRepository.All().FirstOrDefault(x => x.Id == userFollowing.UserId);
                 viewModel.UserFollowings.Add(new UserFollowingsViewModel
                 {
+                    Id = currUser.Id,
                     UserName = currUser.UserName,
                     UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id) != null) ? "/images/users/" + this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id).Id + "." +
                 this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id).Extension : "/images/users/default-profile-icon.jpg",
@@ -146,11 +148,13 @@
                 var currUser = this.usersRepository.All().FirstOrDefault(x => x.Id == userFollower.FollowerId);
                 viewModel.UserFollowers.Add(new UserFollowersViewModel
                 {
+                    Id = currUser.Id,
                     UserName = currUser.UserName,
                     UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId) != null) ? "/images/users/" + this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId).Id + "." +
                 this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId).Extension : "/images/users/default-profile-icon.jpg",
                 });
             }
+
             return viewModel;
         }
 
@@ -195,6 +199,7 @@
                 var currUser = this.usersRepository.All().FirstOrDefault(x => x.Id == userFollowing.UserId);
                 viewModel.UserFollowings.Add(new UserFollowingsViewModel
                 {
+                    Id = currUser.Id,
                     UserName = currUser.UserName,
                     UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id) != null) ? "/images/users/" + this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id).Id + "." +
                 this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id).Extension : "/images/users/default-profile-icon.jpg",
@@ -206,6 +211,7 @@
                 var currUser = this.usersRepository.All().FirstOrDefault(x => x.Id == userFollower.FollowerId);
                 viewModel.UserFollowers.Add(new UserFollowersViewModel
                 {
+                    Id = currUser.Id,
                     UserName = currUser.UserName,
                     UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId) != null) ? "/images/users/" + this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId).Id + "." +
                 this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId).Extension : "/images/users/default-profile-icon.jpg",
