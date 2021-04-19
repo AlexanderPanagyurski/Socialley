@@ -1,6 +1,8 @@
 ﻿namespace Socialley.Services.Data
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -11,6 +13,8 @@
 
     public class UsersService : IUsersService
     {
+        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif", "jpeg", "PNG", "JPG", "JPEG", "GIF" };
+
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IDeletableEntityRepository<Post> postsRepository;
         private readonly UserManager<ApplicationUser> userManager;
@@ -35,6 +39,39 @@
             this.postsImagesRepository = postsImagesRepository;
             this.userImagesRepository = userImagesRepository;
             this.userFavouritePostsRepository = userFavouritePostsRepository;
+        }
+
+        public async Task ChangeAvatar(string userId, AvatarEditInputModel input, string imagePath)
+        {
+            var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
+            Directory.CreateDirectory($"{imagePath}/users/");
+            if (input.NewProfileImage != null)
+            {
+                var image = input.NewProfileImage;
+                var extension = Path.GetExtension(image.FileName).TrimStart('.');
+                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
+                {
+                    throw new ArgumentException($"Invalid image extension {extension}");
+                }
+
+                var oldProfileImage = this.userImagesRepository.All().FirstOrDefault(x => x.UserId == userId && x.IsProfileImage);
+                if (oldProfileImage != null)
+                {
+                    oldProfileImage.IsProfileImage = false;
+                }
+
+                var dbImage = new UserImage
+                {
+                    UserId = userId,
+                    Extension = extension,
+                    IsProfileImage = true,
+                };
+                user.UserImages.Add(dbImage);
+                var physicalPath = $"{imagePath}/users/{dbImage.Id}.{extension}";
+                using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
+                await image.CopyToAsync(fileStream);
+                await this.userImagesRepository.SaveChangesAsync();
+            }
         }
 
         public async Task FollowUserAsync(string followerId, string userId)

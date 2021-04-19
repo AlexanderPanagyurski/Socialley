@@ -15,5 +15,7 @@
         UserProfileViewModel GetUserProfile(string userId);
 
         UserProfileViewModel GetFavouritePosts(string userId);
+
+        Task ChangeAvatar(string userId, AvatarEditInputModel input, string imagePath);
     }
 }

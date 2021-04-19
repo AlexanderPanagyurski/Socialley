@@ -1,0 +1,90 @@
+﻿@page
+@model Socialley.Web.ViewModels.Users.AvatarEditInputModel
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject Socialley.Data.Common.Repositories.IDeletableEntityRepository<UserImage> userImages
+
+@{
+    this.ViewData["Title"] = "Change profile image";
+
+    var loggedUser = await this.UserManager.GetUserAsync(this.User);
+    var profileImage = (userImages.All().FirstOrDefault(x => x.UserId == loggedUser.Id && x.IsProfileImage == true) != null) ? "/images/users/" + userImages.All().FirstOrDefault(x => x.UserId == loggedUser.Id && x.IsProfileImage == true).Id + "." + userImages.All().FirstOrDefault(x => x.UserId == loggedUser.Id && x.IsProfileImage == true).Extension : "/images/doctors/default-profile-icon.jpg";
+}
+
+<head>
+    <link href="~/css/avatar.css" rel="stylesheet" />
+</head>
+@if (this.TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @this.TempData["Message"]
+    </div>
+}
+<h4>@ViewData["Title"]</h4>
+<div id="avatarDiv">
+</div>
+<div id="changeForm">
+    <form method="post" enctype="multipart/form-data" asp-area="" asp-controller="Users" asp-action="ChangeAvatar" asp-route-userId="@loggedUser.Id">
+        <div class="p-2">
+            <div class="logoContainer p-2" width="200" height="200">
+                <img src="@profileImage" style="width:30%;">
+            </div>
+            <div class="fileContainer sprite p-2">
+                <input asp-for="NewProfileImage" value="Избери снимка">
+            </div>
+            <div class="form-group p-2">
+                <input type="submit" value="Качи" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>
+<hr />
+<div class="row">
+    @*@foreach (var userImage in this.Model.UserUserImages)
+        {
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@userImage" alt="Card image cap">
+                <div class="card-body">
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        }
+        <div></div>*@
+</div>
+
+@*<form asp-area="" asp-controller="Users" asp-action="DeleteAvatar">
+        <input type="hidden" asp-for="@Model.UserId" value="@loggedUser.Id" />
+        <div>
+            <button class="btn btn-primary" type="submit">Изтрий</button>
+        </div>
+    </form>*@
+@section Scripts{
+    <script>
+        $("input:file").change(function () {
+            var fileName = $(this).val();
+            if (fileName.length > 0) {
+                $(this).parent().children('span').html(fileName);
+            }
+            else {
+                $(this).parent().children('span').html("Choose file");
+
+            }
+        });
+        //file input preview
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.logoContainer img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("input:file").change(function () {
+            readURL(this);
+        });
+    </script>
+}
