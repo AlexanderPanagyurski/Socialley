@@ -240,6 +240,7 @@
                     UserName = currUser.UserName,
                     UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id) != null) ? "/images/users/" + this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id).Id + "." +
                 this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == currUser.Id).Extension : "/images/users/default-profile-icon.jpg",
+                    IsFollowed = true,
                 });
             }
 
@@ -252,6 +253,7 @@
                     UserName = currUser.UserName,
                     UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId) != null) ? "/images/users/" + this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId).Id + "." +
                 this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId).Extension : "/images/users/default-profile-icon.jpg",
+                    IsFollowed = this.followersRepository.All().FirstOrDefault(x => x.FollowerId == userId && x.UserId == currUser.Id) != null,
                 });
             }
 
