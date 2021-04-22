@@ -78,6 +78,7 @@
                 <p><a href="/Identity/Account/Manage">Profile</a></p>
                 <p><a href="/Identity/Account/Manage/Email">Email</a></p>
                 <p><a href="/Identity/Account/Manage/ChangePassword">Change password</a></p>
+                <p><a href="/Identity/Account/Manage/ChangeAvatar">Change profile image</a></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -101,7 +102,7 @@
                    
                        <div class="list-group-item d-flex align-items-center">
                            <img src="@userFollowing.UserProfileUrl" alt="" width="50px" class="rounded-circle">
-                           <div class="flex-fill pl-3 pr-3"><div><a asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@userFollowing." class="text-dark font-weight-600">@userFollowing.UserName</a></div></div> 
+                           <div class="flex-fill pl-3 pr-3"><div><a asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@userFollowing.Id" class="text-dark font-weight-600">@userFollowing.UserName</a></div></div> 
                            @if (userFollowing.IsFollowed)
                            {
                                 <a href="#" class="btn btn-primary">Followed</a>
