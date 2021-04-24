@@ -18,9 +18,18 @@
                         <p class="col-6 text-muted font-size-sm">Followers: @item.FollowersCount</p>
                         <p class="col-6 text-muted font-size-sm">Followings: @item.FollowingsCount</p>
                     </div>
-                    <form asp-area="" asp-controller="Users" asp-action="Follow" asp-route-userId="@item.UserId" method="post">
-                        <button class="btn btn-outline-primary">Follow</button>
-                    </form>
+                    @if (!item.IsFollowed)
+                    {
+                        <form asp-area="" asp-controller="Users" asp-action="Follow" asp-route-userId="@item.UserId" method="post">
+                            <button class="btn btn-outline-primary">Follow</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post">
+                            <button class="btn btn-primary">Followed</button>
+                        </form>
+                    }
                 </div>
             </div>
         </div>

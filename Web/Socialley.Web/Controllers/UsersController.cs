@@ -30,9 +30,10 @@
         }
 
         [Authorize]
-        public IActionResult GetAllUsers(int page = 1)
+        public async Task<IActionResult> GetAllUsers(int page = 1)
         {
-            var viewModel = this.usersService.GetAllUsers(6, (page - 1) * 6);
+            var user = await this.userManager.GetUserAsync(this.User);
+            var viewModel = this.usersService.GetAllUsers(user.Id,6, (page - 1) * 6);
             var count = this.usersService.GetUsersCount();
             viewModel.PagesCount = (int)Math.Ceiling((double)count / 6);
             viewModel.CurrentPage = page;
