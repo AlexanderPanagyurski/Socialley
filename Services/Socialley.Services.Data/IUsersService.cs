@@ -6,7 +6,7 @@
 
     public interface IUsersService
     {
-        AllUsersViewModel GetAllUsers(int? take = null, int skip = 0);
+        AllUsersViewModel GetAllUsers(string userId, int? take = null, int skip = 0);
 
         int GetUsersCount();
 

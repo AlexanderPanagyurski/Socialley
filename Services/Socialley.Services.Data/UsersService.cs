@@ -83,7 +83,7 @@
             await this.usersRepository.SaveChangesAsync();
         }
 
-        public AllUsersViewModel GetAllUsers(int? take = null, int skip = 0)
+        public AllUsersViewModel GetAllUsers(string userId, int? take = null, int skip = 0)
         {
             AllUsersViewModel viewModel = null;
 
@@ -103,6 +103,7 @@
                             ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
                             UserId = x.Id,
                             UserUserName = x.UserName,
+                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id) != null,
                         })
                         .Skip(skip)
                         .Take(take.Value)
@@ -124,6 +125,7 @@
                             ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
                             UserId = x.Id,
                             UserUserName = x.UserName,
+                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id) != null,
                         })
                         .ToArray(),
                 };

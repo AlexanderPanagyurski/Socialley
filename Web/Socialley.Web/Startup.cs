@@ -108,6 +108,11 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute(
+                           "forumAllUsers",
+                           "allUsers/{name:minLength(3)}",
+                           new { controller = "Users", action = "GetAllUsers" });
+                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
         }
