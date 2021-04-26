@@ -101,5 +101,13 @@
             this.TempData["Message"] = "Successfully updated your profile!";
             return this.Redirect("/Identity/Account/Manage/ChangeAvatar");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddDescription(DescriptionInputModel inputModel)
+        {
+            var loggedUser = await this.userManager.GetUserAsync(this.User);
+            await this.usersService.AddDescription(loggedUser.Id, inputModel.Description);
+            return this.RedirectToAction(nameof(this.MyProfile));
+        }
     }
 }

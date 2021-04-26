@@ -18,6 +18,8 @@ namespace Socialley.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
 
+        public string Description { get; set; }
+
         public string ProfileImage { get; set; }
 
         public DateTime DateOfBirth { get; set; }

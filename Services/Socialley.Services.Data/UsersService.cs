@@ -41,6 +41,13 @@
             this.userFavouritePostsRepository = userFavouritePostsRepository;
         }
 
+        public async Task AddDescription(string userId, string content)
+        {
+            var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
+            user.Description = content;
+            await this.usersRepository.SaveChangesAsync();
+        }
+
         public async Task ChangeAvatar(string userId, AvatarEditInputModel input, string imagePath)
         {
             var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
@@ -217,6 +224,7 @@
                 FollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == userId),
                 ProfileImageUrl = (userImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + userImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." +
                 userImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
+                Description = user.Description,
             };
             viewModel.UserPosts = new List<UserPostsViewModel>();
             viewModel.UserFollowings = new List<UserFollowingsViewModel>();
