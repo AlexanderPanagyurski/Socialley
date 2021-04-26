@@ -59,6 +59,7 @@
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
+            <a href="#" id="toTopBtn" class="fas fa-arrow-up" data-abc="true"></a>
             @this.RenderBody()
         </main>
     </div>
@@ -78,6 +79,7 @@
         <script src="~/js/like-post.js" asp-append-version="true"></script>
         <script src="~/js/posts-gallery.js" asp-append-version="true"></script>
         <script src="~/js/change-avatar.js" asp-append-version="true"></script>
+        <script src="~/js/toggle-up-button.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
@@ -89,6 +91,7 @@
         <script src="~/js/like-post.js" asp-append-version="true"></script>
         <script src="~/js/posts-gallery.js" asp-append-version="true"></script>
         <script src="~/js/change-avatar.js" asp-append-version="true"></script>
+        <script src="~/js/toggle-up-button.js" asp-append-version="true"></script>
     </environment>
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
