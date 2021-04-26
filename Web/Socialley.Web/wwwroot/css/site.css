@@ -154,8 +154,11 @@ body {
     bottom: 70px;
     right: 60px;
     z-index: 98;
-    padding: 21px;
+    padding: 16px;
+    font-size:25px;
     background-color: rgb(105, 231, 255);
+    text-decoration: none;
+    color:white;
 }
 
 .js .cd-top--fade-out {
