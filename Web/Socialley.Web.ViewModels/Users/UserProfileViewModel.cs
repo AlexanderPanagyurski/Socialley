@@ -1,12 +1,16 @@
 ﻿namespace Socialley.Web.ViewModels.Users
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
+
+    using Ganss.XSS;
 
     public class UserProfileViewModel
     {
         public string UserName { get; set; }
+
+        public string Description { get; set; }
+
+        public string SanitizedDescription => new HtmlSanitizer().Sanitize(this.Description);
 
         public string ProfileImageUrl { get; set; }
 

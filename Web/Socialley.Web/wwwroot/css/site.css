@@ -278,3 +278,7 @@ body {
 .searchInputWrapper > .searchInputIcon {
     right: 0.2rem;
 }
+
+.description p{
+    width:100%;
+}

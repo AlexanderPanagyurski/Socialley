@@ -15,6 +15,9 @@
                 <a data-toggle="modal" data-target="#user-followings"><p class="followings-paragraph text-secondary pl-4 pt-4 pr-4 d-inline-flex">Followings: @this.Model.FollowingsCount</p></a>
             </div>
         </div>
+        <div class="row description">
+            @Html.Raw(this.Model.SanitizedDescription)
+        </div>
     </div>
 </div>
 <hr />
@@ -22,47 +25,47 @@
     <div class="row">
         @foreach (var post in this.Model.UserPosts)
         {
-<div class="post-galley col-sm-4 mt-4 col-lg-4 col-md-12 thumb">
-    <div class="card text-white">
-        <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
-           data-image="@post.ImageUrl"
-           data-target="#image-gallery">
-            <img src="@post.ImageUrl" style="height:320px; object-fit:cover;" class="card-img rounded opacity img-fluid z-depth-1" id="myImg">
-            <div class="row flex-column">
-                <div class="col card-img-overlay">
-                    <i class="fas fa-heart image-likes"></i>
+            <div class="post-galley col-sm-4 mt-4 col-lg-4 col-md-12 thumb">
+                <div class="card text-white">
+                    <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
+                       data-image="@post.ImageUrl"
+                       data-target="#image-gallery">
+                        <img src="@post.ImageUrl" style="height:320px; object-fit:cover;" class="card-img rounded opacity img-fluid z-depth-1" id="myImg">
+                        <div class="row flex-column">
+                            <div class="col card-img-overlay">
+                                <i class="fas fa-heart image-likes"></i>
+                            </div>
+                            <div class="col card-img-overlay likes">
+                                @post.PostLikes
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <div class="col card-img-overlay likes">
-                    @post.PostLikes
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="image-gallery-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">×</span><span class="sr-only">Close</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <img id="image-gallery-image" class="img-responsive col-md-12" src="@post.ImageUrl">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary float-left" id="show-previous-image">
-                        <i class="fa fa-arrow-left"></i>
-                    </button>
+                <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="image-gallery-title"></h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img id="image-gallery-image" class="img-responsive col-md-12" src="@post.ImageUrl">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary float-left" id="show-previous-image">
+                                    <i class="fa fa-arrow-left"></i>
+                                </button>
 
-                    <button type="button" id="show-next-image" class="btn btn-secondary float-right">
-                        <i class="fa fa-arrow-right"></i>
-                    </button>
+                                <button type="button" id="show-next-image" class="btn btn-secondary float-right">
+                                    <i class="fa fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>}
+            </div>}
     </div>
 </div>
 <div class="modal fade" id="account-settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -96,18 +99,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-             <div class="modal-body modal-follow">
+            <div class="modal-body modal-follow">
                 @foreach (var userFollowing in this.Model.UserFollowings)
                 {
-                   
-                       <div class="list-group-item d-flex align-items-center">
-                           <img src="@userFollowing.UserProfileUrl" alt="" width="50px" class="rounded-circle">
-                           <div class="flex-fill pl-3 pr-3"><div><a asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@userFollowing.Id" class="text-dark font-weight-600">@userFollowing.UserName</a></div></div> 
-                           @if (userFollowing.IsFollowed)
-                           {
-                                <a href="#" class="btn btn-primary">Followed</a>
-                           }
-                       </div>
+
+                    <div class="list-group-item d-flex align-items-center">
+                        <img src="@userFollowing.UserProfileUrl" alt="" width="50px" class="rounded-circle">
+                        <div class="flex-fill pl-3 pr-3"><div><a asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@userFollowing.Id" class="text-dark font-weight-600">@userFollowing.UserName</a></div></div>
+                        @if (userFollowing.IsFollowed)
+                        {
+                            <a href="#" class="btn btn-primary">Followed</a>
+                        }
+                    </div>
 
                 }
             </div>
@@ -130,7 +133,7 @@
 
                     <div class="list-group-item d-flex align-items-sm-center">
                         <img src="@userFollower.UserProfileUrl" alt="" width="50px" class="rounded-circle">
-                        <div class="flex-fill pl-3 pr-3"><div><a asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@userFollower.Id" class="text-dark font-weight-600">@userFollower.UserName</a></div></div> 
+                        <div class="flex-fill pl-3 pr-3"><div><a asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@userFollower.Id" class="text-dark font-weight-600">@userFollower.UserName</a></div></div>
                         @if (userFollower.IsFollowed)
                         {
                             <a href="#" class="btn btn-primary">Followed</a>
