@@ -1,5 +1,10 @@
 ﻿@page
+@inject UserManager<ApplicationUser> UserManager
 @model Socialley.Web.ViewModels.Users.DescriptionInputModel
+@{ 
+    var user = await this.UserManager.GetUserAsync(this.User);
+    var Description = user.Description;
+}
 
 <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -15,7 +20,7 @@
 <form asp-area="" asp-controller="Users" asp-action="AddDescription">
     <div>
         <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
+        <textarea asp-for="@Description" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <input type="submit" class="btn btn-primary" />
