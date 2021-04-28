@@ -28,7 +28,7 @@
                                     <a href=""><img class="img-fluid rounded-circle" src="@post.UserProfileImageUrl" alt="User"></a>
                                 </div>
                                 <div class="media-body">
-                                    <p class="m-0">@post.UserUserName</p>
+                                    <p class="m-0"><a class="user-profile-hyperlink" asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@post.UserId">@post.UserUserName</a></p>
                                     <small><span class="post-datetime-created">@post.CreatedOn.ToShortDateString()</span></small>
                                 </div>
                             </div><!--/ media -->

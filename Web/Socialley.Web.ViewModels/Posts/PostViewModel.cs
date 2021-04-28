@@ -10,6 +10,8 @@
 
         public int FavoritesCount { get; set; }
 
+        public string UserId { get; set; }
+
         public string UserUserName { get; set; }
 
         public string UserProfileImageUrl { get; set; }

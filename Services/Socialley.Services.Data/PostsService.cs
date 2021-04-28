@@ -95,6 +95,7 @@
                     posts.Add(new PostViewModel
                     {
                         Id = post.Id,
+                        UserId = currUser.Id,
                         FavoritesCount = postLikesCount,
                         UserUserName = currUser.UserName,
                         ImageUrl = "/images/posts/" + currPostImage.FirstOrDefault(x => x.PostId == post.Id).Id + "." + currPostImage.FirstOrDefault(x => x.PostId == post.Id).Extension,
