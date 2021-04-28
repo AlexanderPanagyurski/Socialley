@@ -285,3 +285,13 @@ body {
 .description p{
     width:100%;
 }
+
+.user-profile-hyperlink {
+    text-decoration: none;
+    color: #aaa;
+}
+
+    .user-profile-hyperlink:hover {
+        text-decoration: none;
+        color: #aaa;
+    }
