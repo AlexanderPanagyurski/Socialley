@@ -2,7 +2,6 @@
     this.ViewData["Title"] = "Privacy Policy";
     <link href="~/css/custom.css" rel="stylesheet" />
 }
-<a href="#" id="toTopBtn" class="cd-top text-replace js-cd-top cd-top--is-visible cd-top--fade-out" data-abc="true"></a>
 <div class="responsive-margin">
     <div style="text-align: center!important; margin: 0 auto!important;" class="col-12 col-md-8">
         <h1 class="display-2 mb-3" style="color:#3f4554;">Privacy Policy</h1>
@@ -156,24 +155,3 @@
         <li>Via Email:  alexander.panagyurski@gmail.com</li>
     </ul>
 </div>
-
-@section Scripts{
-    <script>
-            $(document).ready(function () {
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 20) {
-                        $('#toTopBtn').fadeIn();
-                    } else {
-                        $('#toTopBtn').fadeOut();
-                    }
-                });
-
-                $('#toTopBtn').click(function () {
-                    $("html, body").animate({
-                        scrollTop: 0
-                    }, 1000);
-                    return false;
-                });
-            });
-    </script>
-}
