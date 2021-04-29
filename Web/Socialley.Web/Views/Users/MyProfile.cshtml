@@ -139,7 +139,9 @@
                         }
                         else
                         {
-                            <a href="#" class="btn btn-outline-primary">Follow</a>
+                            <form asp-area="" asp-controller="Users" asp-action="Follow" asp-route-userId="@userFollower.Id" method="post">
+                                <button class="btn btn-outline-primary">Follow</button>
+                            </form>
                         }
                     </div>
                 }
