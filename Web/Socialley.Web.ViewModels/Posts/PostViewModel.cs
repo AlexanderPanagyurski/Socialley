@@ -16,6 +16,12 @@
 
         public string UserProfileImageUrl { get; set; }
 
+        public int UserFollowingsCount { get; set; }
+
+        public int UserFollowersCount { get; set; }
+
+        public int UserPostsCount { get; set; }
+
         public string ImageUrl { get; set; }
 
         public string Content { get; set; }

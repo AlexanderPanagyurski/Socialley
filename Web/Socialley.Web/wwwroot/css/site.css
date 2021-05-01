@@ -295,3 +295,17 @@ body {
         text-decoration: none;
         color: #aaa;
     }
+
+.img-popover{
+    width:20%;
+    display:inline-flex;
+}
+.paragraph-username-popver{
+    width:40%;
+    display:inline-flex;
+}
+.popover {
+    height: 550px;
+    max-width: 30%;
+}
+

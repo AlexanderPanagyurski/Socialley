@@ -103,6 +103,9 @@
                         UserProfileImageUrl = postOwnerPorifleImag,
                         CreatedOn = post.CreatedOn,
                         IsLiked = this.postsLikesRepository.All().Any(x => x.PostId == post.Id && x.UserId == userId),
+                        UserFollowersCount = this.followersRepository.All().Count(y => y.UserId == currUser.Id),
+                        UserFollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == currUser.Id),
+                        UserPostsCount = this.postsRepository.All().Count(x => x.UserId == currUser.Id),
                     });
                 }
             }
