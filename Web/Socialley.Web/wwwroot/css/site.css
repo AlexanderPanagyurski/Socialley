@@ -297,7 +297,7 @@ body {
     }
 
 .img-popover{
-    width:20%;
+    width:16%;
     display:inline-flex;
 }
 .paragraph-username-popver{
@@ -309,3 +309,7 @@ body {
     max-width: 30%;
 }
 
+.popover-info-paragraph{
+    display:inline-flex;
+    font-size:16px;
+}
