@@ -97,41 +97,5 @@
         }
     </div><!--/ container -->
 </section>
-@section Scripts{
-    <script>
-        $(document).ready(function () {
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > 20) {
-                    $('#toTopBtn').fadeIn();
-                } else {
-                    $('#toTopBtn').fadeOut();
-                }
-            });
 
-            $('#toTopBtn').click(function () {
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 1000);
-                return false;
-            });
-        });
-    </script>
-<script>
-    //$(document).ready(function () {
-    //    $('.paragraph-popover').popover();
-    //});
-    $('.paragraph-popover').popover({
-        html: true,
-        trigger: 'hover',
-    }).on('hide.bs.popover', function () {
-        if ($(".popover:hover").length) {
-            return false;
-        }
-    });
-
-    $('body').on('mouseleave', '.popover', function () {
-        $('.popover').popover('hide');
-    });
-</script>
-}
 
