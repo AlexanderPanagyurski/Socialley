@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
 
     using Ganss.XSS;
@@ -107,6 +108,23 @@
                         UserFollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == currUser.Id),
                         UserPostsCount = this.postsRepository.All().Count(x => x.UserId == currUser.Id),
                     });
+                }
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append("<div class='row'>");
+                foreach (var currPostUrl in currUserPosts.OrderByDescending(x => x.CreatedOn).Take(6))
+                {
+                    sb.Append($"<div class='post-galley col-sm-4 mt-4 col-lg-4 col-md-12 thumb'><img src='{"/images/posts/" + currPostUrl.ImagePosts.FirstOrDefault(x => x.PostId == currPostUrl.Id).Id + "." + currPostUrl.ImagePosts.FirstOrDefault(x => x.PostId == currPostUrl.Id).Extension}' class='card-img rounded opacity img-fluid z-depth-1 pop'></div>");
+                }
+
+                sb.Append("</div>");
+
+                foreach (var currPost in posts)
+                {
+                    if (currPost.UserId == currUser.Id)
+                    {
+                        currPost.LastSixUserPostsUrls = sb.ToString();
+                    }
                 }
             }
 

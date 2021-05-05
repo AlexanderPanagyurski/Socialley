@@ -31,5 +31,7 @@
         public DateTime CreatedOn { get; set; }
 
         public bool IsLiked { get; set; }
+
+        public string LastSixUserPostsUrls { get; set; }
     }
 }

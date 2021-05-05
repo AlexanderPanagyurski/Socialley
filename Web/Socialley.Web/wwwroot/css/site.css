@@ -313,3 +313,7 @@ body {
     display:inline-flex;
     font-size:16px;
 }
+
+.pop {
+    object-fit: cover;
+}
