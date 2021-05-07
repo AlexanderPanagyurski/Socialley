@@ -305,11 +305,13 @@ body {
     display:inline-flex;
 }
 .popover {
-    height: 550px;
+    height: 520px;
     max-width: 30%;
 }
 
 .popover-info-paragraph{
+    margin-top:10px;
+    margin-bottom:0px;
     display:inline-flex;
     font-size:16px;
 }
