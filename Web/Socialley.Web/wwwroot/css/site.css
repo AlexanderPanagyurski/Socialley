@@ -117,12 +117,12 @@ body {
     border-radius: 50%;
 }
 
-.fa-heart {
+.like {
     color: lightgrey;
     font-size: 25px;
 }
 
-    .fa-heart:hover {
+    .like:hover {
         color: red;
     }
 
@@ -203,6 +203,14 @@ body {
     }
 
 .image-likes {
+    color: lightgrey;
+    font-size: 25px;
+    margin: 45%;
+}
+
+.image-likes:hover {
+    color: lightgrey;
+    font-size: 25px;
     margin: 45%;
 }
 

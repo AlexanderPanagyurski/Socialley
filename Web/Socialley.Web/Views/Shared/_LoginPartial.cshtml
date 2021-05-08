@@ -28,11 +28,11 @@
                 <img src="@profileImage" width="40" height="40" class="rounded-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="MyProfile">My profile</a>
-                <a class="dropdown-item" asp-area="" asp-controller="Posts" asp-action="Create">Create post</a>
-                <a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="FavouritePosts">Favourite posts</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="MyProfile"><i class="far fa-user-circle"></i> My profile</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Posts" asp-action="Create"><i class="far fa-plus-square"></i> Create post</a>
+                <a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="FavouritePosts"><i class="far fa-heart icon"></i> Favourite posts</a>
                 <form class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                    <button type="submit" class="nav-link btn btn-link text-dark"><i class="fas fa-sign-out-alt"></i> Logout</button>
                 </form>
             </div>
         </li>
