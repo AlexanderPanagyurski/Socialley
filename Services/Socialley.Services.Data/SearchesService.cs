@@ -1,5 +1,6 @@
 ﻿using Socialley.Data.Common.Repositories;
 using Socialley.Data.Models;
+using Socialley.Web.ViewModels.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,17 @@ namespace Socialley.Services.Data
             this.usersRepository = usersRepository;
         }
 
-        public string[] Searches()
+        public SearchedUsersResponseModel[] Searches(string title)
         {
-            var titles = this.usersRepository
+            SearchedUsersResponseModel[] titles = this.usersRepository
                 .All()
-                .Select(x => x.UserName)
+                .Where(x => x.UserName.Contains(title))
+                .Select(x => new SearchedUsersResponseModel
+                {
+                    Id = x.Id,
+                    UserName = x.UserName,
+                    ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
+                })
                 .ToArray();
 
             return titles;

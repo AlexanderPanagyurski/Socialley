@@ -7,6 +7,7 @@
 
     using Microsoft.AspNetCore.Mvc;
     using Socialley.Services.Data;
+    using Socialley.Web.ViewModels.Users;
 
     [ApiController]
     [Route("api/[controller]")]
@@ -19,9 +20,9 @@
             this.searchesService = searchesService;
         }
 
-        public ActionResult<string[]> Searches()
+        public ActionResult<SearchedUsersResponseModel[]> Searches(string title)
         {
-            var responseModel = this.searchesService.Searches();
+            var responseModel = this.searchesService.Searches(title);
 
             return responseModel;
         }
