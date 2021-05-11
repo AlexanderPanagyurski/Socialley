@@ -155,10 +155,10 @@ body {
     right: 60px;
     z-index: 98;
     padding: 16px;
-    font-size:25px;
+    font-size: 25px;
     background-color: rgb(105, 231, 255);
     text-decoration: none;
-    color:white;
+    color: white;
 }
 
 .js .cd-top--fade-out {
@@ -208,11 +208,11 @@ body {
     margin: 45%;
 }
 
-.image-likes:hover {
-    color: lightgrey;
-    font-size: 25px;
-    margin: 45%;
-}
+    .image-likes:hover {
+        color: lightgrey;
+        font-size: 25px;
+        margin: 45%;
+    }
 
 .thumbnail:hover {
     filter: brightness(80%);
@@ -245,9 +245,10 @@ body {
     cursor: pointer
 }
 
-.modal-follow{
-    height:350px;
+.modal-follow {
+    height: 350px;
 }
+
 .searchInputWrapper {
     position: relative;
 }
@@ -290,8 +291,8 @@ body {
     right: 0.2rem;
 }
 
-.description p{
-    width:100%;
+.description p {
+    width: 100%;
 }
 
 .user-profile-hyperlink {
@@ -304,27 +305,37 @@ body {
         color: #aaa;
     }
 
-.img-popover{
-    width:16%;
-    display:inline-flex;
+.img-popover {
+    width: 16%;
+    display: inline-flex;
 }
-.paragraph-username-popver{
-    width:40%;
-    display:inline-flex;
+
+.paragraph-username-popver {
+    width: 40%;
+    display: inline-flex;
 }
+
 .popover {
     height: 520px;
     max-width: 30%;
 }
 
-.popover-info-paragraph{
-    margin-top:10px;
-    margin-bottom:0px;
-    display:inline-flex;
-    font-size:16px;
+.popover-info-paragraph {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    display: inline-flex;
+    font-size: 16px;
 }
 
 .pop {
-    height:150px;
+    height: 150px;
     object-fit: cover;
+}
+
+.autocomoplete-profile-image {
+    margin-right: 2px;
+}
+
+.autocomplete-list-element {
+    width:340px;
 }

@@ -1,7 +1,9 @@
-﻿namespace Socialley.Services.Data
+﻿using Socialley.Web.ViewModels.Users;
+
+namespace Socialley.Services.Data
 {
     public interface ISearchesService
     {
-        string[] Searches();
+        SearchedUsersResponseModel[] Searches(string title);
     }
 }
