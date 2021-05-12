@@ -14,9 +14,10 @@
         }
     })
         .autocomplete('instance')._renderItem = function (ul, item) {
-            return $('<li class="list-group-item d-flex align-items-sm-center autocomplete-list-element">')
+            return $(`<a  href="/Users/UserProfile?userId=${item.id}"<li class="list-group-item d-flex align-items-sm-center autocomplete-list-element">`)
                 .append(`<div class="img-fluid autocomoplete-profile-image"><img src="${item.profileImageUrl}" class="rounded-circle" width="50px"></div>`)
-                .append(`<div class="flex-fill pl-3 pr-3"><div><a  href="/Users/UserProfile?userId=${item.id}"  class="text-dark font-weight-600">${item.userName}</a></div></div>`)
+                .append(`<div class="flex-fill pl-3 pr-3"><div class="text-dark font-weight-600">${item.userName}</div></div>`)
+                .append('</a>')
                 .appendTo(ul);
         }
 });

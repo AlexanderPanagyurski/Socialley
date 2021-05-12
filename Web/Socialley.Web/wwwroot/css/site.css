@@ -337,5 +337,13 @@ body {
 }
 
 .autocomplete-list-element {
-    width:340px;
+    width: 340px;
+}
+
+.ui-menu-item:hover {
+    background-color: #F5F5F5;
+}
+
+.ui-menu-item:hover {
+    text-decoration:none;
 }
