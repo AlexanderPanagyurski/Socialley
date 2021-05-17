@@ -1,6 +1,7 @@
 ﻿@model Socialley.Web.ViewModels.Posts.PostViewModel[]
 @{
     this.ViewData["Title"] = "Home Page";
+    var counter = 1;
 }
 <link href="~/css/post-card.css" rel="stylesheet" />
 <section class="hero">
@@ -29,7 +30,7 @@
                                     <a href=""><img class="img-fluid rounded-circle" src="@post.UserProfileImageUrl" alt="User"></a>
                                 </div>
                                 <div class="media-body">
-                                    <p class="m-0" ><a class="user-profile-hyperlink paragraph-popover" asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@post.UserId" data-trigger="hover" data-toggle="popover" data-title="<img class='img-fluid rounded-circle img-popover ml-2' src='@post.UserProfileImageUrl'><p class='paragraph-username-popver ml-4'><a class='user-profile-hyperlink'  href='/Users/UserProfile?userId=@post.UserId'>@post.UserUserName</a></p>" data-html="true" data-content="<p class='popover-info-paragraph mr-5 ml-5'>Posts: <strong>@post.UserPostsCount</strong></p> <p class='popover-info-paragraph mr-5'>Followers: <strong>@post.UserFollowersCount</strong></p> <p class='popover-info-paragraph'>Followings: <strong>@post.UserFollowingsCount</strong></p>@post.LastSixUserPostsUrls</div>">@post.UserUserName</a></p>
+                                    <p class="m-0"><a class="user-profile-hyperlink paragraph-popover" asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@post.UserId" data-trigger="hover" data-toggle="popover" data-title="<img class='img-fluid rounded-circle img-popover ml-2' src='@post.UserProfileImageUrl'><p class='paragraph-username-popver ml-4'><a class='user-profile-hyperlink'  href='/Users/UserProfile?userId=@post.UserId'>@post.UserUserName</a></p>" data-html="true" data-content="<p class='popover-info-paragraph mr-5 ml-5'>Posts: <strong>@post.UserPostsCount</strong></p> <p class='popover-info-paragraph mr-5'>Followers: <strong>@post.UserFollowersCount</strong></p> <p class='popover-info-paragraph'>Followings: <strong>@post.UserFollowingsCount</strong></p>@post.LastSixUserPostsUrls</div>">@post.UserUserName</a></p>
                                     <small><span class="post-datetime-created">@post.CreatedOn.ToShortDateString()</span></small>
                                 </div>
                             </div><!--/ media -->
@@ -39,25 +40,25 @@
                             <img class="img-fluid" src="@post.ImageUrl" alt="Image">
                         </div><!--/ cardbox-item -->
                         <div class="cardbox-base">
-                          
+
                             @if (this.User.Identity.IsAuthenticated)
                             {
                                 var id = $"\"{post.Id}\"";
-                               
+
                                 <div class="clearfix row">
-                                    <form id="favoritesForm" method="post"></form>
+                                    <form class="favoritesForm" method="post"></form>
                                     <div class="col-1 ml-2 mt-2 mb-2">
                                         @if (post.IsLiked)
                                         {
-                                            <a href="#" onclick="addToFavorites(@id); return false"><i class="fa fa-heart like" style="color:red"></i></a>
+                                            <a href="#" onclick="addToFavorites(@id,@counter); return false"><i class="fa fa-heart like" style="color:red"></i></a>
                                         }
                                         else
                                         {
-                                            <a href="#" onclick="addToFavorites(@id); return false"><i class="fa fa-heart like"></i></a>
+                                            <a href="#" onclick="addToFavorites(@id,@counter); return false"><i class="fa fa-heart like"></i></a>
                                         }
                                     </div>
                                     <div class="col-1 mt-2">
-                                        <div id="favoritesCount">@post.FavoritesCount</div>
+                                        <div id="favoritesCount @counter">@post.FavoritesCount</div>
                                     </div>
 
                                 </div>
@@ -83,6 +84,7 @@
 
                 </div><!--/ col-lg-6 -->
             </div><!--/ row -->
+            counter++;
         }
     </div><!--/ container -->
 </section>
