@@ -1,5 +1,5 @@
-﻿function addToFavorites(postId) {
-    var token = $("#favoritesForm input[name=__RequestVerificationToken]").val();
+﻿function addToFavorites(postId, counter) {
+    var token = $(".favoritesForm input[name=__RequestVerificationToken]").val();
     var json = { postId: postId };
     $.ajax({
         url: "/api/favorites",
@@ -9,7 +9,7 @@
         dataType: "json",
         headers: { 'X-CSRF-TOKEN': token },
         success: function (data) {
-            $("#favoritesCount").html(data.favoritesCount);
+            $(`#favoritesCount ${counter}`).html(data.favoritesCount);
         }
     });
 }
