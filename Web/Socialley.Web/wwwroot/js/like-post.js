@@ -10,6 +10,8 @@
         headers: { 'X-CSRF-TOKEN': token },
         success: function (data) {
             $(`#favoritesCount ${counter}`).html(data.favoritesCount);
+            location.reload();
+            return false;
         }
     });
 }
