@@ -193,12 +193,12 @@ body {
     background-color: hsla(var(--cd-color-3-h), var(--cd-color-3-s), var(--cd-color-3-l), 0.8);
 }
 
-.fa-cog {
+.account-settings {
     color: lightgrey;
     font-size: 22px;
 }
 
-    .fa-cog:hover {
+    .account-settings:hover {
         cursor: pointer;
     }
 
