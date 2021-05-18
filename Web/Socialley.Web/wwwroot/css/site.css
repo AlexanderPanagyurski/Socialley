@@ -337,7 +337,7 @@ body {
 }
 
 .autocomplete-list-element {
-    width: 360px;
+    width: 390px;
 }
 
 .ui-menu-item:hover {
@@ -350,7 +350,7 @@ body {
 
 .ui-autocomplete {
     max-height: 480px;
-    width: 360px;
+    width: 390px;
     overflow-y: auto;
     /* prevent horizontal scrollbar */
     overflow-x: hidden;
