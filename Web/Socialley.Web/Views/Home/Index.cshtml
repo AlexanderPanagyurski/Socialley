@@ -27,7 +27,7 @@
                             </div><!--/ dropdown -->
                             <div class="media m-0">
                                 <div class="d-flex mr-3">
-                                    <a href=""><img class="img-fluid rounded-circle" src="@post.UserProfileImageUrl" alt="User"></a>
+                                    <img src="@post.UserProfileImageUrl" alt="" width="50px" class="rounded-circle">
                                 </div>
                                 <div class="media-body">
                                     <p class="m-0"><a class="user-profile-hyperlink paragraph-popover" asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@post.UserId" data-trigger="hover" data-toggle="popover" data-title="<img class='img-fluid rounded-circle img-popover ml-2' src='@post.UserProfileImageUrl'><p class='paragraph-username-popver ml-4'><a class='user-profile-hyperlink'  href='/Users/UserProfile?userId=@post.UserId'>@post.UserUserName</a></p>" data-html="true" data-content="<p class='popover-info-paragraph mr-5 ml-5'>Posts: <strong>@post.UserPostsCount</strong></p> <p class='popover-info-paragraph mr-5'>Followers: <strong>@post.UserFollowersCount</strong></p> <p class='popover-info-paragraph'>Followings: <strong>@post.UserFollowingsCount</strong></p>@post.LastSixUserPostsUrls</div>">@post.UserUserName</a></p>
