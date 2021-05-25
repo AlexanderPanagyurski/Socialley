@@ -40,27 +40,6 @@
 </div>
 <hr />
 <div class="row">
-    @*@foreach (var userImage in this.Model.UserUserImages)
-        {
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="@userImage" alt="Card image cap">
-                <div class="card-body">
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        }
-        <div></div>*@
-</div>
-
-@*<form asp-area="" asp-controller="Users" asp-action="DeleteAvatar">
-        <input type="hidden" asp-for="@Model.UserId" value="@loggedUser.Id" />
-        <div>
-            <button class="btn btn-primary" type="submit">Изтрий</button>
-        </div>
-    </form>*@
 @section Scripts{
     <script>
         $("input:file").change(function () {

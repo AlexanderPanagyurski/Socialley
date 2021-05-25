@@ -67,14 +67,6 @@
                 <span class="sr-only">(current)</span>
             </span>
         </li>
-        @*@for (int i = 1; i <= Model.PagesCount; i++)
-            {
-                var active = i == this.Model.CurrentPage ? " active" : string.Empty;
-                <li class="page-item @active">
-                    <a class="page-link" asp-route="forumCategory"
-                       asp-route-name="@this.Model.Title" asp-route-page="@i">@i</a>
-                </li>
-            }*@
         @for (int i = Model.CurrentPage + 1; i <= Model.CurrentPage + 4; i++)
         {
             if (i <= Model.PagesCount)
