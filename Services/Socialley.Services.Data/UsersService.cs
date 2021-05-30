@@ -207,6 +207,60 @@
             return viewModel;
         }
 
+        public AllUsersViewModel GetSearchedUsers(string userId, string username, int? take = null, int skip = 0)
+        {
+            AllUsersViewModel viewModel = null;
+
+            if (take.HasValue)
+            {
+                viewModel = new AllUsersViewModel
+                {
+                    AllUsers = this.usersRepository
+                        .All()
+                        .Where(x => x.UserName.ToUpper().Contains(username.ToUpper()))
+                        .OrderByDescending(x => x.Posts.Count())
+                        .Select(x => new UserViewModel
+                        {
+                            FollowersCount = this.followersRepository.All().Count(y => y.UserId == x.Id),
+                            FollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == x.Id),
+                            Email = x.Email,
+                            PostsCount = x.Posts.Count(),
+                            ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
+                            UserId = x.Id,
+                            UserUserName = x.UserName,
+                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id) != null,
+                        })
+                        .Skip(skip)
+                        .Take(take.Value)
+                        .ToArray(),
+                };
+            }
+            else
+            {
+                viewModel = new AllUsersViewModel
+                {
+                    AllUsers = this.usersRepository
+                        .All()
+                        .Where(x => x.UserName.ToUpper().Contains(username.ToUpper()))
+                        .OrderByDescending(x => x.Posts.Count())
+                        .Select(x => new UserViewModel
+                        {
+                            Email = x.Email,
+                            FollowersCount = this.followersRepository.All().Count(y => y.UserId == x.Id),
+                            FollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == x.Id),
+                            PostsCount = x.Posts.Count(),
+                            ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
+                            UserId = x.Id,
+                            UserUserName = x.UserName,
+                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id) != null,
+                        })
+                        .ToArray(),
+                };
+            }
+
+            return viewModel;
+        }
+
         public UserProfileViewModel GetUserProfile(string userId)
         {
             var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
@@ -271,6 +325,11 @@
             }
 
             return viewModel;
+        }
+
+        public int GetCountByUsersBySearch(string username)
+        {
+            return this.usersRepository.All().Count(x => x.UserName.ToUpper().Contains(username.ToUpper()));
         }
 
         public int GetUsersCount()

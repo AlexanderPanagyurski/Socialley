@@ -356,4 +356,10 @@ body {
     overflow-x: hidden;
     /* add padding to account for vertical scrollbar */
     padding-right: 20px;
-} 
+}
+
+.searchInputIcon {
+    border: none;
+    padding: 0;
+    background: none;
+}
