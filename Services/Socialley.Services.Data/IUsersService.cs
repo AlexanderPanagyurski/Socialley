@@ -19,5 +19,9 @@
         Task ChangeAvatar(string userId, AvatarEditInputModel input, string imagePath);
 
         Task AddDescription(string userId, string content);
+
+        AllUsersViewModel GetSearchedUsers(string userId, string title, int? take = null, int skip = 0);
+
+        int GetCountByUsersBySearch(string userName);
     }
 }

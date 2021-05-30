@@ -47,9 +47,9 @@
                         }
                         <li class="nav-item pl-4 mt-1">
                             <div class="searchInputWrapper">
-                                <form class="form-inline my-2 my-lg-0" method="get">
-                                    <input  class="searchInput"id="tags" type="text" placeholder='Search' aria-label="Search" name="title"/>
-                                    <i class="searchInputIcon fa fa-search" type="submit"></i>
+                                <form class="form-inline my-2 my-lg-0" asp-controller="Users" asp-action="GetSearchedUsers" method="get">
+                                    <input class="searchInput" id="tags" type="text" placeholder='Search' aria-label="Search" name="username" />
+                                    <button class="searchInputIcon fa fa-search" type="submit"></button>
                                 </form>
                             </div>
                         </li>

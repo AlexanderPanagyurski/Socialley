@@ -3,8 +3,7 @@
     this.ViewData["Title"] = "Home Page";
     var counter = 1;
 }
-<link href="~/css/post-card.css" rel="stylesheet" />
-<section class="hero">
+<section class="hero"  onload="loadPosts(@this.Model)">
     <div class="container">
         @foreach (var post in this.Model)
         {

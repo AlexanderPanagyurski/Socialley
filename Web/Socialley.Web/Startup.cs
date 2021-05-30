@@ -113,9 +113,14 @@
                            "forumAllUsers",
                            "allUsers/{name:minLength(3)}",
                            new { controller = "Users", action = "GetAllUsers" });
+                        endpoints.MapControllerRoute(
+                           "forumSearchedUsers",
+                           "searchedUsers/{name:minLength(1)}",
+                           new { controller = "Users", action = "GetSearchedUsers" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
+
         }
     }
 }

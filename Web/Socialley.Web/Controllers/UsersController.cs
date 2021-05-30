@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,8 @@
 
     public class UsersController : BaseController
     {
+        private const int ItemsPerPage = 6;
+
         private readonly IUsersService usersService;
         private readonly IPostsService postsService;
         private readonly UserManager<ApplicationUser> userManager;
@@ -108,6 +111,18 @@
             var loggedUser = await this.userManager.GetUserAsync(this.User);
             await this.usersService.AddDescription(loggedUser.Id, inputModel.Description);
             return this.RedirectToAction(nameof(this.MyProfile));
+        }
+
+        public async Task<IActionResult> GetSearchedUsers(string username, int page = 1)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var viewModel = this.usersService.GetSearchedUsers(user.Id, username, ItemsPerPage, (page - 1) * ItemsPerPage);
+            var count = this.usersService.GetCountByUsersBySearch(username);
+            viewModel.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
+            viewModel.CurrentPage = page;
+            viewModel.UserName = username;
+
+            return this.View(viewModel);
         }
     }
 }
