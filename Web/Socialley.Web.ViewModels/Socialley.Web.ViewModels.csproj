@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Administration\" />
     <Folder Include="Home\" />
   </ItemGroup>
 

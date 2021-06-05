@@ -7,7 +7,6 @@
     using Socialley.Data.Common.Repositories;
     using Socialley.Data.Models;
     using Socialley.Data.Repositories;
-    using Socialley.Data.Seeding;
     using Socialley.Services.Data;
     using Socialley.Services.Mapping;
     using Socialley.Services.Messaging;
@@ -64,7 +63,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IPostsService, PostsService>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IFavoritesService, FavoritesService>();
@@ -81,7 +79,6 @@
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 dbContext.Database.Migrate();
-                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
             if (env.IsDevelopment())
