@@ -9,5 +9,7 @@
         Task<string> CreateAsync(PostCreateInputModel input, string userId, string imagePath);
 
         PostViewModel[] GetPosts(string userId);
+
+        PostViewModel[] GetAllPosts(string userId);
     }
 }
