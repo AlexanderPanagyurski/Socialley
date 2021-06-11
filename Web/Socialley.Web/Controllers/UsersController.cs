@@ -115,6 +115,10 @@
 
         public async Task<IActionResult> GetSearchedUsers(string username, int page = 1)
         {
+            if (username==null)
+            {
+                username = string.Empty;
+            }
             var user = await this.userManager.GetUserAsync(this.User);
             var viewModel = this.usersService.GetSearchedUsers(user.Id, username, ItemsPerPage, (page - 1) * ItemsPerPage);
             var count = this.usersService.GetCountByUsersBySearch(username);
