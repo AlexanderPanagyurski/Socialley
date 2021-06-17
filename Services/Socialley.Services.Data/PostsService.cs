@@ -132,6 +132,32 @@
             return posts.OrderByDescending(x => x.CreatedOn).ToArray();
         }
 
+        public PostViewModel GetById(string postId)
+        {
+            var post = this.postsRepository.All().FirstOrDefault(x => x.Id == postId);
+
+            var currPostImage = this.postsImagesRepository.All().Where(x => x.PostId == post.Id);
+            var postOwner = this.usersRepository.All().FirstOrDefault(x => x.Id == post.UserId);
+            var postOwnerImages = this.imagesRepository.All().Where(x => x.UserId == postOwner.Id);
+            var postOwnerPorifleImag = (postOwnerImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ?
+                "/images/users/" + postOwnerImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + postOwnerImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : " /images/users/default-profile-icon.jpg";
+            var postLikesCount = this.postsLikesRepository.All().Count(x => x.PostId == post.Id);
+
+            PostViewModel viewModel = new PostViewModel
+            {
+                Id = post.Id,
+                UserId = post.UserId,
+                FavoritesCount = postLikesCount,
+                UserUserName = postOwner.UserName,
+                ImageUrl = "/images/posts/" + currPostImage.FirstOrDefault(x => x.PostId == post.Id).Id + "." + currPostImage.FirstOrDefault(x => x.PostId == post.Id).Extension,
+                Content = post.Content,
+                UserProfileImageUrl = postOwnerPorifleImag,
+                CreatedOn = post.CreatedOn,
+            };
+
+            return viewModel;
+        }
+
         public PostViewModel[] GetPosts(string userId)
         {
             var followings = this.followersRepository.All().Where(x => x.FollowerId == userId);
