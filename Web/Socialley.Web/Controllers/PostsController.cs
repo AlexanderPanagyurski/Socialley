@@ -56,5 +56,19 @@
             this.TempData["InfoMessage"] = "Forum post created!";
             return this.RedirectToAction(nameof(Index), new { Controller="Home" });
         }
+
+        public async Task<IActionResult> ById(string id)
+        {
+            var postViewModel = this.postsService.GetById(id);
+
+            if (postViewModel == null)
+            {
+                return this.Redirect("Home/StatusCodeError");
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            return this.View(postViewModel);
+        }
     }
 }

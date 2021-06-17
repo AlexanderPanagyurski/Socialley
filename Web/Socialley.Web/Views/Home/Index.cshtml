@@ -19,7 +19,7 @@
                                 </button>
                                 <div class="dropdown-menu dropdown-scale dropdown-menu-right" role="menu" style="position: absolute; transform: translate3d(-136px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
                                     <a class="dropdown-item" href="#">Hide post</a>
-                                    <a class="dropdown-item" href="#">Go to post</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">Go to post</a>
                                     <a class="dropdown-item" href="#">Stop following</a>
                                     <a class="dropdown-item" href="#">Report</a>
                                 </div>
