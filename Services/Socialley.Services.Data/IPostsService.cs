@@ -12,6 +12,6 @@
 
         PostViewModel[] GetAllPosts(string userId);
 
-        PostViewModel GetById(string postId);
+        PostViewModel GetById(string postId, string userId);
     }
 }

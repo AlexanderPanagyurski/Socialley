@@ -54,12 +54,13 @@
             }
 
             this.TempData["InfoMessage"] = "Forum post created!";
-            return this.RedirectToAction(nameof(Index), new { Controller="Home" });
+            return this.RedirectToAction(nameof(Index), new { Controller = "Home" });
         }
 
         public async Task<IActionResult> ById(string id)
         {
-            var postViewModel = this.postsService.GetById(id);
+            var loggedUser = await this.userManager.GetUserAsync(this.User);
+            var postViewModel = this.postsService.GetById(id, loggedUser.Id);
 
             if (postViewModel == null)
             {
