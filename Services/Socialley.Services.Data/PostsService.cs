@@ -132,9 +132,10 @@
             return posts.OrderByDescending(x => x.CreatedOn).ToArray();
         }
 
-        public PostViewModel GetById(string postId)
+        public PostViewModel GetById(string postId, string userId)
         {
             var post = this.postsRepository.All().FirstOrDefault(x => x.Id == postId);
+            var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
 
             var currPostImage = this.postsImagesRepository.All().Where(x => x.PostId == post.Id);
             var postOwner = this.usersRepository.All().FirstOrDefault(x => x.Id == post.UserId);
@@ -153,6 +154,7 @@
                 Content = post.Content,
                 UserProfileImageUrl = postOwnerPorifleImag,
                 CreatedOn = post.CreatedOn,
+                IsLiked = this.postsLikesRepository.All().Any(x => x.PostId == post.Id && x.UserId == userId),
             };
 
             return viewModel;
