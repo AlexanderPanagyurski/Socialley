@@ -392,3 +392,14 @@ body {
 .show-hide{
     margin-left:43%;
 }
+
+.comment-button {
+    border: none;
+    padding: 0;
+    background: none;
+}
+
+.fa-comment-dots {
+    color: lightgrey;
+    font-size: 25px;
+}
