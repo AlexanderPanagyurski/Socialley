@@ -3,7 +3,20 @@
     this.ViewData["Title"] = "Home Page";
     var counter = 1;
 }
-<section class="hero"  onload="loadPosts(@this.Model)">
+<script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: ".comment",
+        plugins: "emoticons autoresize",
+        toolbar: "emoticons",
+        toolbar_location: "bottom",
+        menubar: false,
+        statusbar: false,
+        height: 100,
+        width: 400,
+    });
+</script>
+<section class="hero" onload="loadPosts(@this.Model)">
     <div class="container">
         @foreach (var post in this.Model)
         {
@@ -64,19 +77,19 @@
                                 </div>
 
                             }
-
                             <span class="float-left">
                                 <strong>@post.UserUserName </strong>
                                 @Html.Raw(@post.SanitizedContent)
                             </span>
+
                         </div><!--/ cardbox-base -->
                         <div class="cardbox-comments">
                             <span class="comment-avatar float-left">
                                 <a href=""><img class="rounded-circle" src="@post.UserProfileImageUrl" alt="..."></a>
                             </span>
                             <div class="search">
-                                <input placeholder="Write a comment" type="text">
-                                <button><i class="fa fa-camera"></i></button>
+                                <input class="comment" placeholder="Write a comment" type="text">
+                                <button><i class="fa fa-telegram"></i></button>
                             </div><!--/. Search -->
                         </div><!--/ cardbox-like -->
 
