@@ -48,10 +48,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="cardbox-item">
                             <img class="img-fluid" src="@post.ImageUrl" alt="Image">
-                        </div><!--/ cardbox-item -->
+                        </div>
                         <div class="cardbox-base">
 
                             @if (this.User.Identity.IsAuthenticated)
@@ -81,8 +80,7 @@
                                 <strong>@post.UserUserName </strong>
                                 @Html.Raw(@post.SanitizedContent)
                             </span>
-
-                        </div><!--/ cardbox-base -->
+                        </div>
                         <div class="cardbox-comments">
                             <span class="comment-avatar float-left">
                                 <a href=""><img class="rounded-circle" src="@post.UserProfileImageUrl" alt="..."></a>
@@ -90,16 +88,14 @@
                             <div class="search">
                                 <input class="comment" placeholder="Write a comment" type="text">
                                 <button><i class="fa fa-telegram"></i></button>
-                            </div><!--/. Search -->
-                        </div><!--/ cardbox-like -->
-
-                    </div><!--/ cardbox -->
-
-                </div><!--/ col-lg-6 -->
-            </div><!--/ row -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             counter++;
         }
-    </div><!--/ container -->
+    </div>
 </section>
 
 
