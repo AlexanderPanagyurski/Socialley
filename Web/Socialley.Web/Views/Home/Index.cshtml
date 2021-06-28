@@ -6,14 +6,14 @@
 <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     tinymce.init({
-        selector: ".comment",
+        selector: ".comment-textarea",
         plugins: "emoticons autoresize",
         toolbar: "emoticons",
         toolbar_location: "bottom",
         menubar: false,
         statusbar: false,
-        height: 100,
-        width: 400,
+        height: 120,
+        width: 410,
     });
 </script>
 <section class="hero" onload="loadPosts(@this.Model)">
@@ -85,10 +85,10 @@
                             <span class="comment-avatar float-left">
                                 <a href=""><img class="rounded-circle" src="@post.UserProfileImageUrl" alt="..."></a>
                             </span>
-                            <div class="search">
-                                <input class="comment" placeholder="Write a comment" type="text">
-                                <button><i class="fa fa-telegram"></i></button>
-                            </div>
+                            <form class="comment-section">
+                                    <textarea class="comment-textarea"></textarea>
+                                    <button class="comment-button"><i class="fab fa-telegram-plane pt-4"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>
