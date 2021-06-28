@@ -403,3 +403,10 @@ body {
     color: lightgrey;
     font-size: 25px;
 }
+.comment-section {
+    display:inline-block;
+}
+.comment-section button .fa-telegram-plane {
+    font-size: 30px;
+    padding-left:15px;
+}
