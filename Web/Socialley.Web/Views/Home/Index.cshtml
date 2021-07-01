@@ -7,11 +7,10 @@
 <script type="text/javascript">
     tinymce.init({
         selector: ".comment-textarea",
-        plugins: "emoticons autoresize",
+        plugins: "emoticons",
         toolbar: "emoticons",
         toolbar_location: "bottom",
         menubar: false,
-        statusbar: false,
         height: 120,
         width: 410,
     });
@@ -76,10 +75,17 @@
                                 </div>
 
                             }
-                            <span class="float-left">
-                                <strong>@post.UserUserName </strong>
+                            <strong>@post.UserUserName </strong>
+                            <span id="short-content @post.Id">
+                                @Html.Raw(@post.SanitizedShortContent)
+                            </span>
+                            <span id="whole-content @post.Id" style="display:none">
                                 @Html.Raw(@post.SanitizedContent)
                             </span>
+                            @{ 
+                                var postId = $"\"{post.Id}\"";
+                            }
+                            <a href="#" id="read-more" onclick="readMore(@postId); return false">Read More</a>
                         </div>
                         <div class="cardbox-comments">
                             <span class="comment-avatar float-left">
