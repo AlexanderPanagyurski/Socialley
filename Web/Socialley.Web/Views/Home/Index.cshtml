@@ -82,18 +82,21 @@
                             <span id="whole-content @post.Id" style="display:none">
                                 @Html.Raw(@post.SanitizedContent)
                             </span>
-                            @{ 
+                            @{
                                 var postId = $"\"{post.Id}\"";
                             }
-                            <a href="#" id="read-more" onclick="readMore(@postId); return false">Read More</a>
+                            @if (post.SanitizedContent.Length > 300)
+                            {
+                                <a href="#" id="read-more @post.Id" onclick="readMore(@postId); return false">Read More</a>
+                            }
                         </div>
                         <div class="cardbox-comments">
                             <span class="comment-avatar float-left">
                                 <a href=""><img class="rounded-circle" src="@post.UserProfileImageUrl" alt="..."></a>
                             </span>
                             <form class="comment-section">
-                                    <textarea class="comment-textarea"></textarea>
-                                    <button class="comment-button"><i class="fab fa-telegram-plane pt-4"></i></button>
+                                <textarea class="comment-textarea"></textarea>
+                                <button class="comment-button"><i class="fab fa-telegram-plane pt-4"></i></button>
                             </form>
                         </div>
                     </div>
