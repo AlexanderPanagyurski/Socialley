@@ -19,10 +19,23 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="cardbox-item">
                         <img class="img-fluid" src="@this.Model.ImageUrl" alt="Image">
                     </div>
+                    <strong>@this.Model.UserUserName </strong>
+                    <span id="short-content @this.Model.Id">
+                        @Html.Raw(this.Model.SanitizedShortContent)
+                    </span>
+                    <span id="whole-content @this.Model.Id" style="display:none">
+                        @Html.Raw(this.Model.SanitizedContent)
+                    </span>
+                    @{
+                        var postId = $"\"{this.Model.Id}\"";
+                    }
+                    @if (this.Model.SanitizedContent.Length > 300)
+                    {
+                        <a href="#" id="read-more @this.Model.Id" onclick="readMore(@postId); return false">Read More</a>
+                    }
                     <div class="cardbox-base">
 
                         @if (this.User.Identity.IsAuthenticated)
@@ -49,8 +62,8 @@
                                 </div>
                             </div>
                         }
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
     <div class="btn btn-primary show-hide" onclick="commentsInteract()">Hide comments</div>
