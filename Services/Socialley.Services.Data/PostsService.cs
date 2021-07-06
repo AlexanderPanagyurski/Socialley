@@ -10,6 +10,7 @@
     using Ganss.XSS;
     using Socialley.Data.Common.Repositories;
     using Socialley.Data.Models;
+    using Socialley.Web.ViewModels.Comments;
     using Socialley.Web.ViewModels.Posts;
 
     public class PostsService : IPostsService
@@ -22,6 +23,8 @@
         private readonly IDeletableEntityRepository<UserFollower> followersRepository;
         private readonly IDeletableEntityRepository<ImagePost> postsImagesRepository;
         private readonly IDeletableEntityRepository<FavoritePost> postsLikesRepository;
+        private readonly IDeletableEntityRepository<Comment> commentsRepository;
+        private readonly IDeletableEntityRepository<UserImage> userImagesRepository;
 
         public PostsService(
             IDeletableEntityRepository<Post> postsRepository,
@@ -29,7 +32,9 @@
             IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<UserFollower> followersRepository,
             IDeletableEntityRepository<ImagePost> postsImagesRepository,
-            IDeletableEntityRepository<FavoritePost> postsLikesRepository)
+            IDeletableEntityRepository<FavoritePost> postsLikesRepository,
+            IDeletableEntityRepository<Comment> commentsRepository,
+            IDeletableEntityRepository<UserImage> userImagesRepository)
         {
             this.postsRepository = postsRepository;
             this.imagesRepository = imagesRepository;
@@ -37,6 +42,8 @@
             this.followersRepository = followersRepository;
             this.postsImagesRepository = postsImagesRepository;
             this.postsLikesRepository = postsLikesRepository;
+            this.commentsRepository = commentsRepository;
+            this.userImagesRepository = userImagesRepository;
         }
 
         public async Task<string> CreateAsync(PostCreateInputModel input, string userId, string imagePath)
@@ -155,6 +162,22 @@
                 UserProfileImageUrl = postOwnerPorifleImag,
                 CreatedOn = post.CreatedOn,
                 IsLiked = this.postsLikesRepository.All().Any(x => x.PostId == post.Id && x.UserId == userId),
+                PostComments = this.commentsRepository
+                .All()
+                .Where(x => x.PostId == post.Id)
+                .Select(x => new CommentViewModel
+                {
+                    CommentId = x.Id,
+                    Content = x.Content,
+                    CreatedOn = x.CreatedOn,
+                    UserId = x.UserId,
+                    PostId = post.Id,
+                    UserName = x.User.UserName,
+                    UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(ui => ui.IsProfileImage == true && ui.UserId == x.UserId) != null) ?
+                   "/images/users/" + this.userImagesRepository.All().FirstOrDefault(ui => ui.IsProfileImage == true && ui.UserId == x.UserId).Id + "." + this.userImagesRepository.All().FirstOrDefault(ui => ui.IsProfileImage == true && ui.UserId == x.UserId).Extension : "/images/users/default-profile-icon.jpg",
+                })
+                .OrderByDescending(x => x.CreatedOn)
+                .ToList(),
             };
 
             return viewModel;

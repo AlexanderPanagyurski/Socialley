@@ -1,9 +1,12 @@
 ﻿namespace Socialley.Web.ViewModels.Posts
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Text.RegularExpressions;
     using Ganss.XSS;
+    using Socialley.Data.Models;
+    using Socialley.Web.ViewModels.Comments;
 
     public class PostViewModel
     {
@@ -47,5 +50,7 @@
         public bool IsLiked { get; set; }
 
         public string LastSixUserPostsUrls { get; set; }
+
+        public IEnumerable<CommentViewModel> PostComments { get; set; }
     }
 }
