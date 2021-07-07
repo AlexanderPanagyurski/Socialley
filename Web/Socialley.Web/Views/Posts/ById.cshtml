@@ -14,11 +14,11 @@
                 <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="@comment.UserProfileUrl" />
                 <div class="media-body">
                     <div class="row">
-                        <div class="col-8 d-flex">
+                        <div class="col-10 d-flex">
                             <h5>@comment.UserName</h5><span class="ml-2"><time datetime="@comment.CreatedOn.ToString("o")"></time></span>
 
                         </div>
-                        <div class="col-4">
+                        <div class="col-2 d-flex">
                             @{
                                 var commentId = $"\"{comment.CommentId}\"";
                             }
