@@ -167,6 +167,7 @@
                 .Where(x => x.PostId == post.Id)
                 .Select(x => new CommentViewModel
                 {
+                    ParentId=x.ParentId,
                     CommentId = x.Id,
                     Content = x.Content,
                     CreatedOn = x.CreatedOn,
