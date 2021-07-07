@@ -82,11 +82,17 @@
                                         <div class="media-body">
                                             <div class="row">
                                                 <div class="col-8 d-flex">
-                                                    <h5>@comment.UserName</h5><span>- @comment.CreatedOn</span>
-                                                    
+                                                    <h5>@comment.UserName</h5><span class="ml-2"><time datetime="@comment.CreatedOn.ToString("o")"></time></span>
+
                                                 </div>
                                                 <div class="col-4">
-                                                    <div class="pull-right reply"> <a href="#"><span><i class="fa fa-reply"></i> reply</span></a> </div>
+                                                    @{
+                                                        var commentId = $"\"{comment.CommentId}\"";
+                                                    }
+                                                    @if (this.User.Identity.IsAuthenticated)
+                                                    {
+                                                        <div class="pull-right reply"> <a href="#"><span><i class="fa fa-reply" onclick="showAddCommentForm(@commentId)"> reply</i></span></a> </div>
+                                                    }
                                                 </div>
                                                 <div>
                                                     @Html.Raw(comment.SanitizedContent)
@@ -94,6 +100,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <hr />
                                 }
                             </div>
                         </div>
