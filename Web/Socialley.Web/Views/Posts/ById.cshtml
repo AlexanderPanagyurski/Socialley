@@ -1,7 +1,45 @@
 ﻿@model Socialley.Web.ViewModels.Posts.PostViewModel
 @{
     this.ViewData["Title"] = "Home Page";
+    async Task DisplayComments(string parentId)
+    {
+        var comments = this.Model.PostComments.Where(x => x.ParentId == parentId);
+        if (!comments.Any())
+        {
+            return;
+        }
+        @foreach (var comment in comments)
+        {
+            <div class="media">
+                <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="@comment.UserProfileUrl" />
+                <div class="media-body">
+                    <div class="row">
+                        <div class="col-8 d-flex">
+                            <h5>@comment.UserName</h5><span class="ml-2"><time datetime="@comment.CreatedOn.ToString("o")"></time></span>
+
+                        </div>
+                        <div class="col-4">
+                            @{
+                                var commentId = $"\"{comment.CommentId}\"";
+                            }
+                            @if (this.User.Identity.IsAuthenticated)
+                            {
+                                <div class="pull-right reply"> <a href="#"><span><i class="fa fa-reply" onclick="showAddCommentForm(@commentId)"> reply</i></span></a> </div>
+                            }
+                        </div>
+                        <div>
+                            @Html.Raw(comment.SanitizedContent)
+                            @{
+                                DisplayComments(comment.CommentId);
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
 }
+
 <section class="post-by-id">
     <div class="container container-post">
         <div class="row">
@@ -49,66 +87,40 @@
                                 </div>
                             </div>
                         }
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="btn btn-primary show-hide" onclick="commentsInteract()">Hide comments</div>
-    <div>
-        <form asp-controller="Comments" asp-action="Create" method="post" id="AddCommentForm" style="display: none">
-            <input type="hidden" name="PostId" value="@this.Model.Id" />
-            <input type="hidden" name="ParentId" value="0" />
-            <div>
-                <label for="Content"></label>
-                <textarea name="Content" id="Content" class="form-control"></textarea>
-            </div>
-            <div>
-                <input type="submit" class="btn btn-primary" value="Add comment" />
-            </div>
-        </form>
-    </div>
-    <div class="container-comments">
-        <div class="container mb-5 mt-5">
-            <div class="comment">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="text-center mb-5"> Comments section </h3>
-                        <div class="row">
-                            <div class="col-md-12">
-                                @foreach (var comment in this.Model.PostComments)
-                                {
-                                    <div class="media">
-                                        <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="@comment.UserProfileUrl" />
-                                        <div class="media-body">
-                                            <div class="row">
-                                                <div class="col-8 d-flex">
-                                                    <h5>@comment.UserName</h5><span class="ml-2"><time datetime="@comment.CreatedOn.ToString("o")"></time></span>
-
-                                                </div>
-                                                <div class="col-4">
-                                                    @{
-                                                        var commentId = $"\"{comment.CommentId}\"";
-                                                    }
-                                                    @if (this.User.Identity.IsAuthenticated)
-                                                    {
-                                                        <div class="pull-right reply"> <a href="#"><span><i class="fa fa-reply" onclick="showAddCommentForm(@commentId)"> reply</i></span></a> </div>
-                                                    }
-                                                </div>
-                                                <div>
-                                                    @Html.Raw(comment.SanitizedContent)
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                }
+        <div class="btn btn-primary show-hide" onclick="commentsInteract()">Hide comments</div>
+        <div>
+            <form asp-controller="Comments" asp-action="Create" method="post" id="AddCommentForm" style="display: none">
+                <input type="hidden" name="PostId" value="@this.Model.Id" />
+                <input type="hidden" name="ParentId" value="0" />
+                <div>
+                    <label for="Content"></label>
+                    <textarea name="Content" id="Content" class="form-control"></textarea>
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-primary" value="Add comment" />
+                </div>
+            </form>
+        </div>
+        <div class="container-comments">
+            <div class="container mb-5 mt-5">
+                <div class="comment">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="text-center mb-5"> Comments section </h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @{ DisplayComments(null); }
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </section>
 <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -120,4 +132,14 @@
         menubar: false,
         statusbar: false
     });
+</script>
+
+<script>
+    function showAddCommentForm(parentId) {
+        $("#AddCommentForm input[name='ParentId']").val(parentId);
+        $("#AddCommentForm").show();
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#AddCommentForm").offset().top
+        }, 1000);
+    }
 </script>
