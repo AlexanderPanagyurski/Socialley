@@ -72,7 +72,6 @@
                         <img class="img-fluid" src="@this.Model.ImageUrl" alt="Image">
                     </div>
                     <div class="cardbox-base">
-
                         @if (this.User.Identity.IsAuthenticated)
                         {
                             var id = $"\"{this.Model.Id}\"";
@@ -117,7 +116,7 @@
         </div>
         <div class="container-comments">
             <div class="container mb-5 mt-5">
-                <div class="comment">
+                <div class="comment" >
                     <div class="row">
                         <div class="col-md-12">
                             <h3 class="text-center mb-5"> Comments section </h3>
