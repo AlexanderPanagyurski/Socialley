@@ -90,13 +90,12 @@
                                 <a href="#" id="read-more @post.Id" onclick="readMore(@postId); return false">Read More</a>
                             }
                         </div>
-                        <div class="cardbox-comments">
-                            <span class="comment-avatar float-left">
-                                <a href=""><img class="rounded-circle" src="@post.UserProfileImageUrl" alt="..."></a>
+                        <div class="cardbox-comments"  style="width:100%">
+                            <span class="comment-avatar d-inline-flex" style="width:10%;">
+                                <a href=""><img class="rounded-circle" src="@post.UserProfileImageUrl" style="margin-top: 0px; margin-bottom: 15px;" alt="..."></a>
                             </span>
-                            <form class="comment-section">
-                                <textarea class="comment-textarea"></textarea>
-                                <button class="comment-button"><i class="fab fa-telegram-plane pt-4"></i></button>
+                            <form class="d-inline-flex" style="width:80%">
+                                <input type="text" class="form-control" placeholder="Write comment" style="width:100%; height:60px; margin-top:15px;">
                             </form>
                         </div>
                     </div>
