@@ -5,7 +5,6 @@
     using System.Net;
     using System.Text.RegularExpressions;
     using Ganss.XSS;
-    using Socialley.Data.Models;
     using Socialley.Web.ViewModels.Comments;
 
     public class PostViewModel

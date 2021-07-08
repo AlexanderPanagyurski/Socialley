@@ -28,7 +28,17 @@
                             }
                         </div>
                         <div>
-                            @Html.Raw(comment.SanitizedContent)
+                            <article id="short-content @comment.CommentId">
+                                @Html.Raw(comment.SanitizedShortContent)
+                            </article>
+                            <article id="whole-content @comment.CommentId" style="display:none">
+                                @Html.Raw(comment.SanitizedContent)
+                            </article>
+
+                            @if (comment.SanitizedContent.Length > 300)
+                            {
+                                <a href="#" id="read-more @comment.CommentId" onclick="readMore(@commentId); return false">Read More</a>
+                            }
                             @{
                                 DisplayComments(comment.CommentId);
                             }
