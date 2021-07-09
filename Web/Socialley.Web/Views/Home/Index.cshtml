@@ -71,7 +71,9 @@
                                     <div class="col-1 mt-2">
                                         <div id="favoritesCount @counter">@post.FavoritesCount</div>
                                     </div>
-
+                                    <div class="col-1 mt-2">
+                                        <button type="button" class="comment-button" data-toggle="modal" placeholder="Add comment" data-target=".bd-example-modal-lg"><i class="fa fa-comment-dots"></i></button>
+                                    </div>
                                 </div>
 
                             }
@@ -90,14 +92,22 @@
                                 <a href="#" id="read-more @post.Id" onclick="readMore(@postId); return false">Read More</a>
                             }
                         </div>
-                        <div class="cardbox-comments"  style="width:100%">
-                            <span class="comment-avatar d-inline-flex" style="width:10%;">
-                                <a href=""><img class="rounded-circle" src="@post.UserProfileImageUrl" style="margin-top: 0px; margin-bottom: 15px;" alt="..."></a>
-                            </span>
-                            <form class="d-inline-flex" style="width:80%">
-                                <input type="text" class="form-control" placeholder="Write comment" style="width:100%; height:60px; margin-top:15px;">
-                            </form>
-                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <form>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Write Comment:</label>
+                                <textarea class="form-control" id="comment-text"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Add comment</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -105,5 +115,20 @@
         }
     </div>
 </section>
-
-
+<script>
+    tinymce.init({
+        selector: '#comment-text',
+        height: 300,
+        plugins: 'lists code emoticons',
+        toolbar: 'undo redo | styleselect | bold italic | ' +
+            'alignleft aligncenter alignright alignjustify | ' +
+            'outdent indent | numlist bullist | emoticons',
+        emoticons_append: {
+            custom_mind_explode: {
+                keywords: ['brain', 'mind', 'explode', 'blown'],
+                char: '🤯'
+            }
+        },
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+</script>
