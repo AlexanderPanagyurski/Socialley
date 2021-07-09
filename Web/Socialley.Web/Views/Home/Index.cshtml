@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="cardbox-item">
-                            <img class="img-fluid" src="@post.ImageUrl" alt="Image">
+                            <a asp-area="" asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id"><img class="img-fluid" src="@post.ImageUrl" alt="Image"></a>
                         </div>
                         <div class="cardbox-base">
 
