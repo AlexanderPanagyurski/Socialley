@@ -4,17 +4,6 @@
     var counter = 1;
 }
 <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    tinymce.init({
-        selector: ".comment-textarea",
-        plugins: "emoticons",
-        toolbar: "emoticons",
-        toolbar_location: "bottom",
-        menubar: false,
-        height: 120,
-        width: 410,
-    });
-</script>
 <section class="hero" onload="loadPosts(@this.Model)">
     <div class="container">
         @foreach (var post in this.Model)
