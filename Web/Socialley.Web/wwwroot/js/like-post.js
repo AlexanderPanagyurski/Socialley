@@ -1,4 +1,4 @@
-﻿function addToFavorites(postId, counter) {
+﻿function addToFavorites(postId) {
     var token = $(".favoritesForm input[name=__RequestVerificationToken]").val();
     var json = { postId: postId };
     $.ajax({
@@ -9,7 +9,7 @@
         dataType: "json",
         headers: { 'X-CSRF-TOKEN': token },
         success: function (data) {
-            $(`#favoritesCount ${counter}`).html(data.favoritesCount);
+            $(`#favoritesCount ${postId}`).html(data.favoritesCount);
             location.reload();
             return false;
         }
