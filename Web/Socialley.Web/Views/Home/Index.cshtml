@@ -1,7 +1,6 @@
 ﻿@model Socialley.Web.ViewModels.Posts.PostViewModel[]
 @{
     this.ViewData["Title"] = "Home Page";
-    var counter = 1;
 }
 <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
 <section class="hero" onload="loadPosts(@this.Model)">
@@ -50,15 +49,15 @@
                                     <div class="col-1 ml-2 mt-2 mb-2">
                                         @if (post.IsLiked)
                                         {
-                                            <a href="#" onclick="addToFavorites(@id,@counter); return false"><i class="fa fa-heart like" style="color:red"></i></a>
+                                            <a href="#" onclick="addToFavorites(@id); return false"><i class="fa fa-heart like" style="color:red"></i></a>
                                         }
                                         else
                                         {
-                                            <a href="#" onclick="addToFavorites(@id,@counter); return false"><i class="fa fa-heart like"></i></a>
+                                            <a href="#" onclick="addToFavorites(@id); return false"><i class="fa fa-heart like"></i></a>
                                         }
                                     </div>
                                     <div class="col-1 mt-2">
-                                        <div id="favoritesCount @counter">@post.FavoritesCount</div>
+                                        <div id="favoritesCount @post.Id">@post.FavoritesCount</div>
                                     </div>
                                     <div class="col-1 mt-2">
                                         <button type="button" class="comment-button" data-toggle="modal" placeholder="Add comment" data-target=".bd-example-modal-lg"><i class="fa fa-comment-dots"></i></button>
@@ -100,7 +99,6 @@
                     </div>
                 </div>
             </div>
-            counter++;
         }
     </div>
 </section>
