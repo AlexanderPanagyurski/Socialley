@@ -15,8 +15,7 @@
                 <div class="media-body">
                     <div class="row">
                         <div class="col-10 d-flex">
-                            <h5>@comment.UserName</h5><span class="ml-2"><time datetime="@comment.CreatedOn.ToString("o")"></time></span>
-
+                            <a asp-area="" asp-controller="Users"  asp-action="UserProfile" asp-route-userId="@comment.UserId" class="user-profile-hyperlink comment-section-username"><h5>@comment.UserName</h5></a><span class="ml-2"><time datetime="@comment.CreatedOn.ToString("o")"></time></span>
                         </div>
                         <div class="col-2 d-flex">
                             @{
