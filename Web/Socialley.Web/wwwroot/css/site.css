@@ -417,3 +417,11 @@ body {
     max-height: 100vh;
     overflow: auto;
 }
+
+.comment-section-username{
+    color:black;
+}
+.comment-section-username:hover {
+    color: black;
+    text-decoration:underline;
+}
