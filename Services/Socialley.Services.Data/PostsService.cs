@@ -167,7 +167,7 @@
                 .Where(x => x.PostId == post.Id)
                 .Select(x => new CommentViewModel
                 {
-                    ParentId=x.ParentId,
+                    ParentId = x.ParentId,
                     CommentId = x.Id,
                     Content = x.Content,
                     CreatedOn = x.CreatedOn,
@@ -216,6 +216,23 @@
                         UserFollowersCount = this.followersRepository.All().Count(y => y.UserId == currUser.Id),
                         UserFollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == currUser.Id),
                         UserPostsCount = this.postsRepository.All().Count(x => x.UserId == currUser.Id),
+                        PostComments = this.commentsRepository
+                .All()
+                .Where(x => x.PostId == post.Id)
+                .Select(x => new CommentViewModel
+                {
+                    ParentId = x.ParentId,
+                    CommentId = x.Id,
+                    Content = x.Content,
+                    CreatedOn = x.CreatedOn,
+                    UserId = x.UserId,
+                    PostId = post.Id,
+                    UserName = x.User.UserName,
+                    UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(ui => ui.IsProfileImage == true && ui.UserId == x.UserId) != null) ?
+                   "/images/users/" + this.userImagesRepository.All().FirstOrDefault(ui => ui.IsProfileImage == true && ui.UserId == x.UserId).Id + "." + this.userImagesRepository.All().FirstOrDefault(ui => ui.IsProfileImage == true && ui.UserId == x.UserId).Extension : "/images/users/default-profile-icon.jpg",
+                })
+                .OrderByDescending(x => x.CreatedOn)
+                .ToList(),
                     });
                 }
 
