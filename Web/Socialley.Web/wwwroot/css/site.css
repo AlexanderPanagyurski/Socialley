@@ -296,13 +296,14 @@ body {
 }
 
 .user-profile-hyperlink {
-    text-decoration: none;
-    color: #aaa;
+    font-size:16px;
+    color: black;
 }
 
     .user-profile-hyperlink:hover {
-        text-decoration: none;
-        color: #aaa;
+        font-size: 16px;
+        text-decoration: underline;
+        color: black;
     }
 
 .img-popover {
@@ -392,6 +393,7 @@ body {
 .show-hide{
     margin-left:43%;
 }
+
 
 .comment-button {
     border: none;

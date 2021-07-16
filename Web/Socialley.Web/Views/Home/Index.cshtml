@@ -113,7 +113,7 @@
                                     </div>
 
                                 }
-                                <strong>@post.UserUserName </strong>
+                                <strong><a class="user-profile-hyperlink" asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@post.UserId">@post.UserUserName </a></strong>
                                 <span id="short-content @post.Id">
                                     @Html.Raw(@post.SanitizedShortContent)
                                 </span>
@@ -128,7 +128,7 @@
                                     <a href="#" id="read-more @post.Id" onclick="readMore(@postId); return false">Read More</a>
                                 }
                             </div>
-                            <a href="#modal-comments-@post.Id" data-toggle="modal">Show comments</a>
+                            <strong><a href="#modal-comments-@post.Id" data-toggle="modal">Show comments</a></strong>
                         </div>
                     </div>
                 </div>

@@ -48,7 +48,7 @@
         padding: 4px 0px 4px 10px;
         clear: both;
         font-weight: 400;
-        font-family: 'Abhaya Libre', serif;
+        font-family: Arial, Helvetica, sans-serif, serif;
         font-size: 14px !important;
         color: #848484;
         text-align: inherit;
@@ -90,14 +90,14 @@
 }
 
     .media-body p {
-        font-family: 'Rokkitt', serif;
+        font-family: Arial, Helvetica, sans-serif, serif;
         font-weight: 500 !important;
         font-size: 14px;
         color: #88898a;
     }
 
     .media-body small span {
-        font-family: 'Rokkitt', serif;
+        font-family: Arial, Helvetica, sans-serif, serif;
         font-size: 12px;
         color: #aaa;
         margin-right: 10px;
@@ -162,7 +162,7 @@
             }
 
             .cardbox-base li a span {
-                font-family: 'Rokkitt', serif;
+                font-family: Arial, Helvetica, sans-serif, serif;
                 font-size: 14px;
                 color: #8d8d8d;
                 margin-left: 20px;
@@ -171,7 +171,7 @@
             }
 
             .cardbox-base li a em {
-                font-family: 'Rokkitt', serif;
+                font-family: Arial, Helvetica, sans-serif, serif;
                 font-size: 14px;
                 color: #8d8d8d;
                 position: relative;
@@ -226,7 +226,7 @@
         border: none;
         border-radius: 4px;
         width: 350px;
-        font-family: 'Rokkitt', serif;
+        font-family: Arial, Helvetica, sans-serif, serif;
         font-size: 14px;
         color: #8d8d8d;
         height: inherit;
@@ -266,7 +266,7 @@
 }
 
 .author p {
-    font-family: 'Rokkitt', serif;
+    font-family: Arial, Helvetica, sans-serif, serif;
     font-size: 16px;
     color: #8d8d8d;
 }
