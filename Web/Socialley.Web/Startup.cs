@@ -82,13 +82,17 @@
                 dbContext.Database.Migrate();
             }
 
+            app.UseStatusCodePagesWithRedirects("/Home/StatusCodeError?errorCode={0}");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseMigrationsEndPoint();
+                app.UseDatabaseErrorPage();
             }
             else
             {
+                // app.UseStatusCodePagesWithReExecute("/Home/StatusCodeError", "?errorCode={0}");
+
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
