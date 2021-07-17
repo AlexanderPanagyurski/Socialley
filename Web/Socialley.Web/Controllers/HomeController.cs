@@ -42,6 +42,11 @@
             return this.View();
         }
 
+        public IActionResult SpaceInvaders()
+        {
+            return this.View();
+        }
+
         public IActionResult StatusCodeError(int errorCode)
         {
             return this.View();
