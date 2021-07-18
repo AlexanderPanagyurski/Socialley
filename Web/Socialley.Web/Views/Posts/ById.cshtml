@@ -62,7 +62,14 @@
                             </div>
                             <div class="media-body">
                                 <p class="m-0"><a class="user-profile-hyperlink paragraph-popover" asp-area="" asp-controller="Users" asp-action="UserProfile" asp-route-userId="@this.Model.UserId">@this.Model.UserUserName</a></p>
-                                <small><span class="post-datetime-created">@this.Model.CreatedOn.ToShortDateString()</span></small>
+                                @if (this.Model.ModifiedOn == null)
+                                {
+                                    <small><span class="post-datetime-created"><time datetime="@this.Model.CreatedOn.ToString("o")"></time></span></small>
+                                }
+                                else
+                                {
+                                    <small><span class="post-datetime-created"><time datetime="@this.Model.CreatedOn.ToString("o")"></time>  (edited)</span></small>
+                                }
                             </div>
                         </div>
                     </div>

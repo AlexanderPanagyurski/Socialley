@@ -13,5 +13,10 @@
         PostViewModel[] GetAllPosts(string userId);
 
         PostViewModel GetById(string postId, string userId);
+
+        EditPostViewModel EditPost(string id);
+
+        Task UpdateAsync(string id, EditPostViewModel input);
+
     }
 }

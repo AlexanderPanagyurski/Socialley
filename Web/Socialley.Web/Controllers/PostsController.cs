@@ -71,5 +71,42 @@
 
             return this.View(postViewModel);
         }
+
+        [Authorize]
+        public IActionResult Edit(string id)
+        {
+            var postViewModel = this.postsService.EditPost(id);
+            if (this.userManager.GetUserId(this.User) != postViewModel.OwnerId
+                && !this.User.IsInRole(Socialley.Common.GlobalConstants.AdministratorRoleName))
+            {
+                this.TempData["InfoMessage"] = "You are not authorized to edit this post.";
+                return this.Redirect("/Home/Index");
+            }
+
+            return this.View(postViewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(string id, EditPostViewModel post)
+        {
+            var postViewModel = this.postsService.EditPost(id);
+            if (this.userManager.GetUserId(this.User) != postViewModel.OwnerId
+                && !this.User.IsInRole(Socialley.Common.GlobalConstants.AdministratorRoleName))
+            {
+                this.TempData["InfoMessage"] = "You are not authorized to edit this post.";
+                return this.Redirect("/Home/Index");
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            await this.postsService.UpdateAsync(id, post);
+            this.TempData["InfoMessage"] = "Successfully edited post.";
+            return this.RedirectToAction(nameof(this.ById), new { id });
+        }
+
     }
 }
