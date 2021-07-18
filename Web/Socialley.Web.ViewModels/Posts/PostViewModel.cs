@@ -46,6 +46,8 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public DateTime? ModifiedOn { get; set; }
+
         public bool IsLiked { get; set; }
 
         public string LastSixUserPostsUrls { get; set; }

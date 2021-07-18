@@ -82,6 +82,19 @@
             return post.Id;
         }
 
+        public EditPostViewModel EditPost(string id)
+        {
+            var post = this.postsRepository.All().FirstOrDefault(x => x.Id == id);
+            EditPostViewModel viewModel = new EditPostViewModel
+            {
+                PostId = post.Id,
+                OwnerId = post.UserId,
+                Content = post.Content,
+            };
+
+            return viewModel;
+        }
+
         public PostViewModel[] GetAllPosts(string userId)
         {
             var users = this.usersRepository.All();
@@ -111,6 +124,7 @@
                         Content = post.Content,
                         UserProfileImageUrl = postOwnerPorifleImag,
                         CreatedOn = post.CreatedOn,
+                        ModifiedOn = post.ModifiedOn,
                         IsLiked = this.postsLikesRepository.All().Any(x => x.PostId == post.Id && x.UserId == userId),
                         UserFollowersCount = this.followersRepository.All().Count(y => y.UserId == currUser.Id),
                         UserFollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == currUser.Id),
@@ -161,6 +175,7 @@
                 Content = post.Content,
                 UserProfileImageUrl = postOwnerPorifleImag,
                 CreatedOn = post.CreatedOn,
+                ModifiedOn = post.ModifiedOn,
                 IsLiked = this.postsLikesRepository.All().Any(x => x.PostId == post.Id && x.UserId == userId),
                 PostComments = this.commentsRepository
                 .All()
@@ -212,6 +227,7 @@
                         Content = post.Content,
                         UserProfileImageUrl = postOwnerPorifleImag,
                         CreatedOn = post.CreatedOn,
+                        ModifiedOn=post.ModifiedOn,
                         IsLiked = this.postsLikesRepository.All().Any(x => x.PostId == post.Id && x.UserId == userId),
                         UserFollowersCount = this.followersRepository.All().Count(y => y.UserId == currUser.Id),
                         UserFollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == currUser.Id),
@@ -255,6 +271,17 @@
             }
 
             return posts.OrderByDescending(x => x.CreatedOn).ToArray();
+        }
+
+        public async Task UpdateAsync(string id, EditPostViewModel input)
+        {
+            var post = this.postsRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
+            post.Content = input.Content;
+            post.ModifiedOn = DateTime.UtcNow;
+
+            await this.postsRepository.SaveChangesAsync();
         }
     }
 }
