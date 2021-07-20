@@ -11,5 +11,6 @@ Socialley main purpose is to give people the power to build community and bring 
 - AJAX real-time Requests
 - JavaScript and JS animations
 - TinyMCE
+- jQuery
 - Bootstrap
 - HtmlSanitizer
