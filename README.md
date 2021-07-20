@@ -14,3 +14,4 @@ Socialley main purpose is to give people the power to build community and bring 
 - jQuery
 - Bootstrap
 - HtmlSanitizer
+- Moment.js
