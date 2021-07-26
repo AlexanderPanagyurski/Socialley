@@ -6,6 +6,8 @@
 
     public class PostCreateInputModel
     {
+        public string Tags { get; set; }
+
         public string Content { get; set; }
 
         public IEnumerable<IFormFile> Images { get; set; }

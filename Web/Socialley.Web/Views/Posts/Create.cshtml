@@ -54,6 +54,10 @@
         color: #333;
         flex: 1;
     }
+
+    .tags-area{
+        display:none;
+    }
 </style>
 
 <form method="post" asp-action="Create"
@@ -69,8 +73,10 @@
             <div class="tag-container">
                 <input />
             </div>
-
         </div>
+    </div>
+    <div class="col-sm-12orm-group">
+        <input asp-for="Tags"  class="form-control tags-area"/>
     </div>
     <div>
         <label asp-for="Content"></label>
@@ -82,5 +88,5 @@
 </form>
 
 <script>
-   
+
 </script>
