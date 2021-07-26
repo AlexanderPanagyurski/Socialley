@@ -1,5 +1,7 @@
 ﻿const tagContainer = document.querySelector('.tag-container');
 const input = document.querySelector('.tag-container input');
+let tagsArea = document.querySelector('.tags-area');
+console.log(tagsArea.value);
 
 let tags = [];
 
@@ -35,6 +37,7 @@ input.addEventListener('keyup', (e) => {
     if (evtobj.keyCode == 13 && evtobj.ctrlKey) {
         e.target.value.split(',').forEach(tag => {
             tags.push(tag);
+            tagsArea.value = tags.toString();
         });
 
         addTags();
@@ -50,5 +53,7 @@ document.addEventListener('click', (e) => {
         addTags();
     }
 })
-
+for (let i = 0; i < tags.length; i++) {
+   
+}
 input.focus();
