@@ -29,6 +29,8 @@
 
         public string Content { get; set; }
 
+        public IEnumerable<string> TagsNames { get; set; }
+
         public string ShortContent
         {
             get

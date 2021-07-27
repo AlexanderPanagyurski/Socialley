@@ -1,12 +1,13 @@
 ﻿namespace Socialley.Data.Models
 {
+    using Socialley.Data.Common.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text;
 
-    public class PostTag
+    public class PostTag: BaseDeletableModel<string>
     {
         [Required]
         [ForeignKey(nameof(Post))]
