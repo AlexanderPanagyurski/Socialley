@@ -8,8 +8,12 @@
 
     public class Tag : BaseDeletableModel<string>
     {
+        public Tag()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         [Required]
-        [MaxLength(15)]
         public string Name { get; set; }
 
 

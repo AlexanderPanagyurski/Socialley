@@ -25,6 +25,8 @@
         private readonly IDeletableEntityRepository<FavoritePost> postsLikesRepository;
         private readonly IDeletableEntityRepository<Comment> commentsRepository;
         private readonly IDeletableEntityRepository<UserImage> userImagesRepository;
+        private readonly IDeletableEntityRepository<Tag> tagsRepository;
+        private readonly IDeletableEntityRepository<PostTag> postsTagsRepository;
 
         public PostsService(
             IDeletableEntityRepository<Post> postsRepository,
@@ -34,7 +36,9 @@
             IDeletableEntityRepository<ImagePost> postsImagesRepository,
             IDeletableEntityRepository<FavoritePost> postsLikesRepository,
             IDeletableEntityRepository<Comment> commentsRepository,
-            IDeletableEntityRepository<UserImage> userImagesRepository)
+            IDeletableEntityRepository<UserImage> userImagesRepository,
+            IDeletableEntityRepository<Tag> tagsRepository,
+            IDeletableEntityRepository<PostTag> postsTagsRepository)
         {
             this.postsRepository = postsRepository;
             this.imagesRepository = imagesRepository;
@@ -44,10 +48,13 @@
             this.postsLikesRepository = postsLikesRepository;
             this.commentsRepository = commentsRepository;
             this.userImagesRepository = userImagesRepository;
+            this.tagsRepository = tagsRepository;
+            this.postsTagsRepository = postsTagsRepository;
         }
 
         public async Task<string> CreateAsync(PostCreateInputModel input, string userId, string imagePath)
         {
+
             var post = new Post
             {
                 Content = input.Content,
@@ -79,6 +86,18 @@
 
             await this.postsRepository.AddAsync(post);
             await this.postsRepository.SaveChangesAsync();
+            var tagsArray = input.Tags.Split(',');
+
+            foreach (var tag in tagsArray)
+            {
+                var currTag = new Tag { Name = tag };
+
+                await this.tagsRepository.AddAsync(currTag);
+                await this.tagsRepository.SaveChangesAsync();
+                await this.postsTagsRepository.AddAsync(new PostTag { PostId = post.Id, TagId = currTag.Id });
+                await this.postsTagsRepository.SaveChangesAsync();
+            }
+
             return post.Id;
         }
 
@@ -227,7 +246,7 @@
                         Content = post.Content,
                         UserProfileImageUrl = postOwnerPorifleImag,
                         CreatedOn = post.CreatedOn,
-                        ModifiedOn=post.ModifiedOn,
+                        ModifiedOn = post.ModifiedOn,
                         IsLiked = this.postsLikesRepository.All().Any(x => x.PostId == post.Id && x.UserId == userId),
                         UserFollowersCount = this.followersRepository.All().Count(y => y.UserId == currUser.Id),
                         UserFollowingsCount = this.followersRepository.All().Count(y => y.FollowerId == currUser.Id),
@@ -249,6 +268,7 @@
                 })
                 .OrderByDescending(x => x.CreatedOn)
                 .ToList(),
+                        TagsNames = this.postsTagsRepository.All().Where(x => x.PostId == post.Id).Select(t => t.Tag.Name),
                     });
                 }
 
