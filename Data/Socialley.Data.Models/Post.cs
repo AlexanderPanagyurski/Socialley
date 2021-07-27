@@ -27,8 +27,6 @@
 
         public virtual ICollection<ImagePost> ImagePosts { get; set; } = new HashSet<ImagePost>();
 
-
         public virtual ICollection<PostTag> TagsPosts { get; set; } = new HashSet<PostTag>();
-
     }
 }

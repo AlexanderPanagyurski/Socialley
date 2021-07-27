@@ -135,6 +135,10 @@
                                 {
                                     <a href="#" id="read-more @post.Id" onclick="readMore(@postId); return false">Read More</a>
                                 }
+                                @foreach (var tagName in post.TagsNames)
+                                {
+                                    <a href="#">@tagName</a>
+                                }
                             </div>
                             <strong><a href="#modal-comments-@post.Id" data-toggle="modal">Show comments</a></strong>
                         </div>
