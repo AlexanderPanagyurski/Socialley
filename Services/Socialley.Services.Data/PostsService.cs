@@ -302,6 +302,18 @@
             post.ModifiedOn = DateTime.UtcNow;
 
             await this.postsRepository.SaveChangesAsync();
+
+            var tagsArray = input.Tags.Split(',');
+
+            foreach (var tag in tagsArray)
+            {
+                var currTag = new Tag { Name = tag };
+
+                await this.tagsRepository.AddAsync(currTag);
+                await this.tagsRepository.SaveChangesAsync();
+                await this.postsTagsRepository.AddAsync(new PostTag { PostId = post.Id, TagId = currTag.Id });
+                await this.postsTagsRepository.SaveChangesAsync();
+            }
         }
     }
 }

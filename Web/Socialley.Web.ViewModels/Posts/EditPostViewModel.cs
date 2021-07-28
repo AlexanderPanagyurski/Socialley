@@ -8,6 +8,8 @@
 
     public class EditPostViewModel
     {
+        public string Tags { get; set; }
+
         public string PostId { get; set; }
 
         public string OwnerId { get; set; }
