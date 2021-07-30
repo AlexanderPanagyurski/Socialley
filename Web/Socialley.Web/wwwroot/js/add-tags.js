@@ -1,7 +1,6 @@
 ﻿const tagContainer = document.querySelector('.tag-container');
 const input = document.querySelector('.tag-container input');
 let tagsArea = document.querySelector('.tags-area');
-console.log(tagsArea.value);
 
 let tags = [];
 
