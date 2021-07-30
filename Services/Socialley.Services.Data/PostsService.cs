@@ -213,6 +213,7 @@
                 })
                 .OrderByDescending(x => x.CreatedOn)
                 .ToList(),
+                TagsNames = this.postsTagsRepository.All().Where(x => x.PostId == post.Id).Select(t => t.Tag.Name),
             };
 
             return viewModel;
