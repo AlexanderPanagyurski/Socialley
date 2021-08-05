@@ -135,12 +135,12 @@
                                 {
                                     <a href="#" id="read-more @post.Id" onclick="readMore(@postId); return false">Read More</a>
                                 }
-                            <div>
-                                @foreach (var tagName in post.TagsNames)
-                                {
-                                    <a href="#">@tagName</a>
-                                }
-                            </div>
+                                <div>
+                                    @foreach (var tagName in post.TagsNames)
+                                    {
+                                        <a href="#">@tagName</a>
+                                    }
+                                </div>
                             </div>
                             <strong><a href="#modal-comments-@post.Id" data-toggle="modal">Show comments</a></strong>
                         </div>
@@ -188,8 +188,10 @@
                     </div>
                 </div>
             }
+            <div>
+                <button id="btn" class="btn btn-primary load-more-btn" onclick="viewMore()">Load More</button>
+            </div>
         </div>
-
     </section>
     <script>
         tinymce.init({
@@ -208,3 +210,4 @@
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
         });
     </script>
+    <script src="~/js/infiniteScroll.js"></script>
