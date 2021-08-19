@@ -90,7 +90,16 @@
 
             foreach (var tag in tagsArray)
             {
-                var currTag = new Tag { Name = tag };
+                Tag currTag = null;
+
+                if (this.tagsRepository.All().Any(t => t.Name == tag))
+                {
+                    currTag = this.tagsRepository.All().FirstOrDefault(t => t.Name == tag);
+                }
+                else
+                {
+                    currTag = new Tag { Name = tag };
+                }
 
                 await this.tagsRepository.AddAsync(currTag);
                 await this.tagsRepository.SaveChangesAsync();
