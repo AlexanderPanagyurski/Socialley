@@ -86,25 +86,28 @@
 
             await this.postsRepository.AddAsync(post);
             await this.postsRepository.SaveChangesAsync();
-            var tagsArray = input.Tags.Split(',');
 
-            foreach (var tag in tagsArray)
+            if (input.Tags != null)
             {
-                Tag currTag = null;
-
-                if (this.tagsRepository.All().Any(t => t.Name == tag))
+                var tagsArray = input.Tags.Split(',');
+                foreach (var tag in tagsArray)
                 {
-                    currTag = this.tagsRepository.All().FirstOrDefault(t => t.Name == tag);
-                }
-                else
-                {
-                    currTag = new Tag { Name = tag };
-                }
+                    Tag currTag = null;
 
-                await this.tagsRepository.AddAsync(currTag);
-                await this.tagsRepository.SaveChangesAsync();
-                await this.postsTagsRepository.AddAsync(new PostTag { PostId = post.Id, TagId = currTag.Id });
-                await this.postsTagsRepository.SaveChangesAsync();
+                    if (this.tagsRepository.All().Any(t => t.Name == tag))
+                    {
+                        currTag = this.tagsRepository.All().FirstOrDefault(t => t.Name == tag);
+                    }
+                    else
+                    {
+                        currTag = new Tag { Name = tag };
+                        await this.tagsRepository.AddAsync(currTag);
+                        await this.tagsRepository.SaveChangesAsync();
+                    }
+
+                    await this.postsTagsRepository.AddAsync(new PostTag { PostId = post.Id, TagId = currTag.Id });
+                    await this.postsTagsRepository.SaveChangesAsync();
+                }
             }
 
             return post.Id;
@@ -313,16 +316,28 @@
 
             await this.postsRepository.SaveChangesAsync();
 
-            var tagsArray = input.Tags.Split(',');
-
-            foreach (var tag in tagsArray)
+            if (input.Tags != null)
             {
-                var currTag = new Tag { Name = tag };
+                var tagsArray = input.Tags.Split(',');
 
-                await this.tagsRepository.AddAsync(currTag);
-                await this.tagsRepository.SaveChangesAsync();
-                await this.postsTagsRepository.AddAsync(new PostTag { PostId = post.Id, TagId = currTag.Id });
-                await this.postsTagsRepository.SaveChangesAsync();
+                foreach (var tag in tagsArray)
+                {
+                    Tag currTag = null;
+
+                    if (this.tagsRepository.All().Any(t => t.Name == tag))
+                    {
+                        currTag = this.tagsRepository.All().FirstOrDefault(t => t.Name == tag);
+                    }
+                    else
+                    {
+                        currTag = new Tag { Name = tag };
+                        await this.tagsRepository.AddAsync(currTag);
+                        await this.tagsRepository.SaveChangesAsync();
+                    }
+
+                    await this.postsTagsRepository.AddAsync(new PostTag { PostId = post.Id, TagId = currTag.Id });
+                    await this.postsTagsRepository.SaveChangesAsync();
+                }
             }
         }
     }
