@@ -14,24 +14,25 @@ window.addEventListener('load', () => {
         }
     }
 });
+window.addEventListener('scroll', () => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        //User is currently at the bottom of the page
+        viewMore();
+    }
+});
 function viewMore() {
     let posts = document.getElementsByClassName("col-lg-6 offset-lg-3");
-    let btn = document.getElementById("btn");
-        if (postsShown + 5 <= posts.length) {
-            btn.disabled = false;
-            for (var i = postsShown; i < postsShown + 5; i++) {
-                console.log(posts[i]);
-                posts[i].style.display = "block";
-            }
-            postsShown += 5;
-        } else if (postsShown + 5 > posts.length && postsShown < posts.length) {
-            btn.disabled = false;
-            for (var i = postsShown; i < posts.length; i++) {
-                posts[i].style.display = "block";
-                postsShown++;
-            }
-            btn.disabled = true;
-        } else if (posts.length <= postsShown) {
-            btn.disabled = true;
+    if (postsShown + 5 <= posts.length) {
+        for (var i = postsShown; i < postsShown + 5; i++) {
+            console.log(posts[i]);
+            posts[i].style.display = "block";
         }
+        postsShown += 5;
+    } else if (postsShown + 5 > posts.length && postsShown < posts.length) {
+        for (var i = postsShown; i < posts.length; i++) {
+            posts[i].style.display = "block";
+            postsShown++;
+        }
+    } else if (posts.length <= postsShown) {
+    }
 }
