@@ -138,7 +138,7 @@
                                 <div>
                                     @foreach (var tagName in post.TagsNames)
                                     {
-                                        <a href="#">@tagName</a>
+                                        <a asp-area="" asp-controller="Tags" asp-action="TagPosts" asp-route-tagName="@tagName">@tagName</a>
                                     }
                                 </div>
                             </div>
