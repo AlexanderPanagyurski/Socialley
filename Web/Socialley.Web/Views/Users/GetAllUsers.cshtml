@@ -26,7 +26,7 @@
                     }
                     else
                     {
-                        <form method="post">
+                        <form asp-area="" asp-controller="Users" asp-action="Follow" asp-route-userId="@item.UserId" method="post">
                             <button class="btn btn-primary">Followed</button>
                         </form>
                     }
