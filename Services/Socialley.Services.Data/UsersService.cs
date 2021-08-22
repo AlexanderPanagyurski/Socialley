@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
     using Socialley.Data.Common.Repositories;
     using Socialley.Data.Models;
     using Socialley.Web.ViewModels.Users;
@@ -22,6 +23,7 @@
         private readonly IDeletableEntityRepository<ImagePost> postsImagesRepository;
         private readonly IDeletableEntityRepository<UserImage> userImagesRepository;
         private readonly IDeletableEntityRepository<FavoritePost> userFavouritePostsRepository;
+        private readonly IDeletableEntityRepository<UserFollower> userFollowersRepository;
 
         public UsersService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
@@ -30,7 +32,8 @@
             IDeletableEntityRepository<UserFollower> followersRepository,
             IDeletableEntityRepository<ImagePost> postsImagesRepository,
             IDeletableEntityRepository<UserImage> userImagesRepository,
-            IDeletableEntityRepository<FavoritePost> userFavouritePostsRepository)
+            IDeletableEntityRepository<FavoritePost> userFavouritePostsRepository,
+            IDeletableEntityRepository<UserFollower> userFollowersRepository)
         {
             this.usersRepository = usersRepository;
             this.postsRepository = postsRepository;
@@ -39,6 +42,7 @@
             this.postsImagesRepository = postsImagesRepository;
             this.userImagesRepository = userImagesRepository;
             this.userFavouritePostsRepository = userFavouritePostsRepository;
+            this.userFollowersRepository = userFollowersRepository;
         }
 
         public async Task AddDescription(string userId, string content)
@@ -83,11 +87,33 @@
 
         public async Task FollowUserAsync(string followerId, string userId)
         {
-            var user = this.usersRepository.All().FirstOrDefault(x => x.Id == userId);
-            var follower = this.usersRepository.All().FirstOrDefault(x => x.Id == followerId);
+            var user = await this.usersRepository.All().FirstOrDefaultAsync(x => x.Id == userId);
+            var follower = await this.usersRepository.All().FirstOrDefaultAsync(x => x.Id == followerId);
+            var doesExist = await this.userFollowersRepository.All().AnyAsync(x => x.UserId == follower.Id && x.FollowerId == user.Id);
 
-            user.Followers.Add(new UserFollower { UserId = follower.Id, FollowerId = user.Id });
-            await this.usersRepository.SaveChangesAsync();
+            if (doesExist)
+            {
+                var userFollower = await this.userFollowersRepository
+                    .All()
+                    .FirstOrDefaultAsync(x => x.UserId == follower.Id && x.FollowerId == user.Id);
+                if (userFollower.IsDeleted == false)
+                {
+                    userFollower.IsDeleted = true;
+                    user.DeletedOn = DateTime.UtcNow;
+                }
+                else
+                {
+                    userFollower.IsDeleted = false;
+                    user.DeletedOn = null;
+                }
+
+                await this.userFollowersRepository.SaveChangesAsync();
+            }
+            else
+            {
+                user.Followers.Add(new UserFollower { UserId = follower.Id, FollowerId = user.Id });
+                await this.usersRepository.SaveChangesAsync();
+            }
         }
 
         public AllUsersViewModel GetAllUsers(string userId, int? take = null, int skip = 0)
@@ -110,7 +136,7 @@
                             ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
                             UserId = x.Id,
                             UserUserName = x.UserName,
-                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id) != null,
+                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id && x.IsDeleted == false) != null,
                         })
                         .Skip(skip)
                         .Take(take.Value)
@@ -132,7 +158,7 @@
                             ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
                             UserId = x.Id,
                             UserUserName = x.UserName,
-                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id) != null,
+                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id && x.IsDeleted==false) != null,
                         })
                         .ToArray(),
                 };
@@ -228,7 +254,7 @@
                             ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
                             UserId = x.Id,
                             UserUserName = x.UserName,
-                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id) != null,
+                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id && x.IsDeleted == false) != null,
                         })
                         .Skip(skip)
                         .Take(take.Value)
@@ -252,7 +278,7 @@
                             ProfileImageUrl = (x.UserImages.FirstOrDefault(x => x.IsProfileImage == true) != null) ? "/images/users/" + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Id + "." + x.UserImages.FirstOrDefault(x => x.IsProfileImage == true).Extension : "/images/users/default-profile-icon.jpg",
                             UserId = x.Id,
                             UserUserName = x.UserName,
-                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id) != null,
+                            IsFollowed = this.followersRepository.All().FirstOrDefault(y => y.FollowerId == userId && y.UserId == x.Id && x.IsDeleted == false) != null,
                         })
                         .ToArray(),
                 };
@@ -320,7 +346,7 @@
                     UserName = currUser.UserName,
                     UserProfileUrl = (this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId) != null) ? "/images/users/" + this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId).Id + "." +
                 this.userImagesRepository.All().FirstOrDefault(x => x.IsProfileImage == true && x.UserId == userFollower.FollowerId).Extension : "/images/users/default-profile-icon.jpg",
-                    IsFollowed = this.followersRepository.All().FirstOrDefault(x => x.FollowerId == userId && x.UserId == currUser.Id) != null,
+                    IsFollowed = this.followersRepository.All().FirstOrDefault(x => x.FollowerId == userId && x.UserId == currUser.Id && x.IsDeleted == false) != null,
                 });
             }
 
