@@ -13,6 +13,9 @@
 
 <head>
     <link href="~/css/avatar.css" rel="stylesheet" />
+    <link href="~/css/croppie.css" rel="stylesheet" />
+    <script src="~/js/croppie.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
 </head>
 @if (this.TempData["Message"] != null)
 {
@@ -24,18 +27,56 @@
 <div id="avatarDiv">
 </div>
 <div id="changeForm">
-    <form method="post" enctype="multipart/form-data" asp-area="" asp-controller="Users" asp-action="ChangeAvatar" asp-route-userId="@loggedUser.Id">
-        <div class="p-2">
-            <div class="logoContainer p-2" width="200" height="200">
-                <img src="@profileImage" style="width:30%;">
-            </div>
-            <div class="fileContainer sprite p-2">
-                <input asp-for="NewProfileImage" value="Избери снимка">
+    <div class="container">
+        <form method="post" enctype="multipart/form-data" asp-area="" asp-controller="Users" asp-action="ChangeAvatar" asp-route-userId="@loggedUser.Id">
+            <div class="row">
+                <div class="image-output" width="100px" height="100px">
+                    <img src="@profileImage" alt="" id="item-img-output" width="100%" />
+                </div>
+                <div class="row">
+                    <input type="file" class="item-img" accept="image/*" />
+                </div>
             </div>
             <div class="form-group p-2">
                 <input type="submit" value="Качи" class="btn btn-primary" />
             </div>
-        </div>
-    </form>
+        </form>
+        @*<form method="post" enctype="multipart/form-data" asp-area="" asp-controller="Users" asp-action="ChangeAvatar" asp-route-userId="@loggedUser.Id">
+
+                <div class="p-2">
+                    <div class="logoContainer p-2" width="200" height="200">
+                        <img src="@profileImage" style="width:30%;">
+                    </div>
+                    <div class="fileContainer sprite p-2">
+                        <input asp-for="NewProfileImage" value="Избери снимка">
+                    </div>
+                    <div class="form-group p-2">
+                        <input type="submit" value="Качи" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>*@
+    </div>
 </div>
 <hr />
+<div id="cropImagePop" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Crop Image</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                    <div style="display: block; width: 300px; height: 300px;">
+                        <div id="upload-demo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="cropImageBtn" class="btn btn-primary">Crop</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script src="~/js/imageCropper.js"></script>
