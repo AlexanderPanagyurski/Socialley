@@ -24,4 +24,10 @@
         width:53px;
         height:56px;
     }
+
+    body > div.container {
+        width: 100%;
+        padding:0px;
+        padding:0px;
+    }
 }
