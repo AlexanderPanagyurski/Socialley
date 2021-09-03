@@ -17,7 +17,7 @@
     body > header > nav > div > div > ul.navbar-nav.flex-grow-1 > li.nav-item.pl-4.mt-1 > div > form > #tags{
         width:100%;
     }
-    body > div.container > main > section > div > div:nth-child(1) > div {
+    body > div.container > main > section > div > div > div {
         width: 100%;
     }
     #toTopBtn{
