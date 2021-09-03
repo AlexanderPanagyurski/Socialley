@@ -1,4 +1,4 @@
-﻿@media all and (max-width:600px) {
+﻿@media all and (max-width:1000px) {
     div.cardbox-heading > div.media.m-0 > div.media-body {
         width: 95%;
     }
@@ -16,5 +16,12 @@
 
     body > header > nav > div > div > ul.navbar-nav.flex-grow-1 > li.nav-item.pl-4.mt-1 > div > form > #tags{
         width:100%;
+    }
+    body > div.container > main > section > div > div:nth-child(1) > div {
+        width: 100%;
+    }
+    #toTopBtn{
+        width:53px;
+        height:56px;
     }
 }
