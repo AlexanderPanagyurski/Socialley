@@ -42,3 +42,8 @@
         display:none;
     }
 }
+@media all and (max-width:576px){
+    body > header > nav > div > div > ul.navbar-nav.flex-grow-1 > li.nav-item.pl-4.mt-1{
+        padding-left:0px !important;
+    }
+}
