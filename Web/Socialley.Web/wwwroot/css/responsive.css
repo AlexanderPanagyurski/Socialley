@@ -1,33 +1,44 @@
-﻿@media all and (max-width:1000px) {
+﻿@media all and (max-width:1200px) {
     div.cardbox-heading > div.media.m-0 > div.media-body {
         width: 95%;
     }
-    div.media.m-0 > div.media-body > p > a{
+
+    div.media.m-0 > div.media-body > p > a {
         width: 100%;
-        word-break:break-all;
+        word-break: break-all;
     }
+
     .col-lg-6 offset-lg-3 {
         width: 100%;
     }
+
     div > div > div.cardbox-base > strong > a {
         width: 100%;
         word-break: break-word;
     }
 
-    body > header > nav > div > div > ul.navbar-nav.flex-grow-1 > li.nav-item.pl-4.mt-1 > div > form > #tags{
-        width:100%;
+    body > header > nav > div > div > ul.navbar-nav.flex-grow-1 > li.nav-item.pl-4.mt-1 > div > form > #tags {
+        width: 100%;
     }
+
     body > div.container > main > section > div > div > div {
         width: 100%;
     }
-    #toTopBtn{
-        width:53px;
-        height:56px;
+
+    #toTopBtn {
+        width: 53px;
+        height: 56px;
     }
 
     body > div.container {
         width: 100%;
-        padding:0px;
-        padding:0px;
+        padding: 0px;
+        padding: 0px;
+    }
+}
+
+@media all and (max-width:1000px) {
+    body > header > nav > div > div > ul:nth-child(1) > li:nth-child(1) > a {
+        display:none;
     }
 }
