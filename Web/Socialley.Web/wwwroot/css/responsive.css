@@ -42,3 +42,42 @@
         display:none;
     }
 }
+@media all and (max-width:576px){
+    body > header > nav > div > div > ul.navbar-nav.flex-grow-1 > li.nav-item.pl-4.mt-1{
+        padding-left:0px !important;
+    }
+}
+@media all and (max-width:576px) {
+    #user-followings{
+        width:90%;
+        margin:auto 2%;
+    }
+        #user-followings > div > div > div.modal-body.modal-follow > div>img{
+            width:20%;
+        }
+        #user-followings > div > div > div.modal-body.modal-follow > div > div {
+            word-break:break-all;
+            width: 40%;
+        }
+        #user-followings > div > div > div.modal-body.modal-follow > div > a {
+            width: 30%;
+        }
+
+    #user-followers {
+        width: 90%;
+        margin: auto 2%;
+    }
+
+        #user-followers > div > div > div.modal-body.modal-follow > div > img {
+            width: 20%;
+        }
+
+        #user-followers > div > div > div.modal-body.modal-follow > div > div {
+            word-break: break-all;
+            width: 40%;
+        }
+
+        #user-followers > div > div > div.modal-body.modal-follow > div > a {
+            width: 30%;
+        }
+}
