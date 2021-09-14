@@ -108,5 +108,22 @@
             return this.RedirectToAction(nameof(this.ById), new { id });
         }
 
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var post = this.postsService.GetById(id, user.Id);
+            if (this.userManager.GetUserId(this.User) != post.UserId
+                && !this.User.IsInRole(Socialley.Common.GlobalConstants.AdministratorRoleName))
+            {
+                this.TempData["InfoMessage"] = "You are not authorized to delete this post.";
+                return this.Redirect("/Home/Index");
+            }
+
+            await this.postsService.DeleteAsync(id);
+            this.TempData["InfoMessage"] = "Successfully deleted post.";
+            return this.Redirect("/Home/Index");
+        }
     }
 }

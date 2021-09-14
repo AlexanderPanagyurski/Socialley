@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
 
     using Ganss.XSS;
+    using Microsoft.EntityFrameworkCore;
     using Socialley.Data.Common.Repositories;
     using Socialley.Data.Models;
     using Socialley.Web.ViewModels.Comments;
@@ -111,6 +112,13 @@
             }
 
             return post.Id;
+        }
+
+        public async Task DeleteAsync(string id)
+        {
+            var post = await this.postsRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+            this.postsRepository.Delete(post);
+            await this.postsRepository.SaveChangesAsync();
         }
 
         public EditPostViewModel EditPost(string id)
