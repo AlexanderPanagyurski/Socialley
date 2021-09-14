@@ -18,5 +18,6 @@
 
         Task UpdateAsync(string id, EditPostViewModel input);
 
+        Task DeleteAsync(string id);
     }
 }

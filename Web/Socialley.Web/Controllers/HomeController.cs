@@ -32,6 +32,10 @@
             if (user != null)
             {
                 viewModel = this.postsService.GetPosts(user.Id);
+                foreach (var post in viewModel)
+                {
+                    post.IsOwner = post.UserId == user.Id;
+                }
             }
 
             return this.View(viewModel);
